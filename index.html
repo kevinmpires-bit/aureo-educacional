@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advocacia comprometida com resultados. Dr. Kevin Miyamoto atua em Direito Civil, Criminal e Trabalhista em São Paulo.">
+  <title>Miyamoto Advocacia — Direito Civil, Criminal e Trabalhista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Work+Sans:wght@300;400;500&family=Poiret+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/advocacia.css">
+</head>
+<body>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="nav" role="navigation" aria-label="Navegação principal">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo-text">Miyamoto Advocacia</a>
+
+      <div class="nav__links" role="menubar">
+        <a href="#areas"   class="nav__link" role="menuitem">Áreas</a>
+        <a href="#sobre"   class="nav__link" role="menuitem">Sobre</a>
+        <a href="#blog"    class="nav__link" role="menuitem">Blog</a>
+        <a href="#contato" class="nav__link" role="menuitem">Contato</a>
+      </div>
+
+      <div class="nav__right">
+        <a href="aureo/index.html" class="nav__aureo-btn">Áureo Educacional</a>
+        <button class="nav__burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Menu de navegação">
+    <a href="#areas"   class="nav__mobile-link">Áreas</a>
+    <a href="#sobre"   class="nav__mobile-link">Sobre</a>
+    <a href="#blog"    class="nav__mobile-link">Blog</a>
+    <a href="#contato" class="nav__mobile-link">Contato</a>
+    <a href="aureo/index.html" class="btn-primary nav__mobile-cta">Áureo Educacional</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero" class="hero starfield">
+    <div class="hero__inner">
+      <p class="hero__label">ADVOCACIA · DIREITO · EXCELÊNCIA</p>
+      <h1 class="hero__title">Miyamoto Advocacia</h1>
+      <div class="rule-trio hero__rule"><span></span><span></span><span></span></div>
+      <p class="hero__subtitle">Direito Civil · Criminal · Trabalhista</p>
+      <p class="hero__body">Advocacia comprometida com resultados. Cada caso tratado com atenção, técnica e dedicação que você merece.</p>
+      <div class="hero__actions">
+        <a href="#contato" class="btn-primary">Falar com o advogado</a>
+        <a href="#areas"   class="btn-outline-white">Conhecer as áreas</a>
+      </div>
+      <button class="hero__arrow" onclick="document.getElementById('areas').scrollIntoView({behavior:'smooth'})" aria-label="Rolar para baixo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ÁREAS DE ATUAÇÃO -->
+  <section id="areas">
+    <div class="container">
+      <div class="areas__header">
+        <p class="section-eyebrow">01 — áreas de atuação</p>
+        <h2 class="areas__title">Onde atuamos</h2>
+        <p class="areas__subtitle">Três pilares do Direito. Um compromisso com o seu caso.</p>
+      </div>
+      <div class="areas__grid">
+
+        <!-- Direito Civil -->
+        <div class="area-card">
+          <svg class="area-card__icon" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18 4L4 12v2h2l6 14h12l6-14h2v-2L18 4z" fill-opacity="0.15"/>
+            <path d="M18 4L4 12v2h2l6 14h12l6-14h2v-2L18 4z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="18" y1="4" x2="18" y2="28" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>
+            <line x1="4" y1="14" x2="32" y2="14" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <h3 class="area-card__title">Direito Civil</h3>
+          <p class="area-card__body">Contratos, responsabilidade civil, direito de família, sucessões, posse e propriedade. Atuação em todas as etapas: consultiva, extrajudicial e judicial.</p>
+          <a href="#contato" class="area-card__link">Consultar sobre meu caso →</a>
+        </div>
+
+        <!-- Direito Criminal -->
+        <div class="area-card">
+          <svg class="area-card__icon" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="14" y="2" width="6" height="14" rx="1" fill-opacity="0.15"/>
+            <rect x="14" y="2" width="6" height="14" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 16L28 16L30 22H6L8 16z" fill-opacity="0.15"/>
+            <path d="M8 16L28 16L30 22H6L8 16z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="4" y="22" width="28" height="4" fill-opacity="0.15"/>
+            <rect x="4" y="22" width="28" height="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="17" y1="2" x2="10" y2="9" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <h3 class="area-card__title">Direito Criminal</h3>
+          <p class="area-card__body">Defesa em processos criminais, inquéritos policiais, habeas corpus, revisão criminal e acompanhamento em delegacias. Defesa técnica e comprometida em todas as instâncias.</p>
+          <a href="#contato" class="area-card__link">Consultar sobre meu caso →</a>
+        </div>
+
+        <!-- Direito Trabalhista -->
+        <div class="area-card">
+          <svg class="area-card__icon" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 18C10 14.5 13 12 16.5 13L18 14L19.5 13C23 12 26 14.5 26 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 18C7 22 10 26 18 28C26 26 29 22 29 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 14L10 10M22 14L26 10" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <h3 class="area-card__title">Direito Trabalhista</h3>
+          <p class="area-card__body">Reclamações trabalhistas, rescisões, horas extras, assédio moral, FGTS, férias e acordos coletivos. Representação de trabalhadores e empresas.</p>
+          <a href="#contato" class="area-card__link">Consultar sobre meu caso →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE O ADVOGADO -->
+  <section id="sobre">
+    <div class="container">
+      <div class="sobre__grid">
+        <div>
+          <!-- DR. KEVIN: adicione sua foto profissional. Salve como assets/professor.jpg e substitua este bloco por: <img src="assets/professor.jpg" alt="Dr. Kevin Miyamoto, advogado"> -->
+          <div class="sobre__photo">
+            <p>Foto do Dr. Kevin Miyamoto</p>
+          </div>
+        </div>
+        <div>
+          <p class="section-eyebrow sobre__eyebrow">02 — o advogado</p>
+          <h2 class="sobre__name">Dr. Kevin Miyamoto</h2>
+          <div class="rule-trio rule-trio--sm sobre__rule"><span></span><span></span><span></span></div>
+
+          <!-- DR. KEVIN: insira aqui sua formação, OAB, pós-graduações e experiência -->
+          <p class="sobre__text">Formação e trajetória profissional do Dr. Kevin Miyamoto. Insira aqui sua graduação, pós-graduação, especializações e anos de experiência na área jurídica.</p>
+
+          <!-- DR. KEVIN: insira aqui sua filosofia de trabalho e diferenciais -->
+          <p class="sobre__text">Minha filosofia de trabalho é baseada no compromisso com cada cliente. Insira aqui sua abordagem, o que diferencia o seu escritório e como você conduz cada caso.</p>
+
+          <div class="sobre__oab">OAB/SP Nº 540.970</div>
+
+          <div class="sobre__cta">
+            <a href="#contato" class="btn-secondary">Falar diretamente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG JURÍDICO -->
+  <section id="blog">
+    <div class="container">
+      <div class="blog__header">
+        <p class="section-eyebrow">03 — conhecimento jurídico</p>
+        <h2 class="blog__title">Artigos e atualizações</h2>
+        <p class="blog__subtitle">Conteúdo jurídico para você entender seus direitos.</p>
+      </div>
+      <div class="blog__grid">
+
+        <!-- ARTIGO 1: Direito Civil -->
+        <article class="blog-card">
+          <div class="blog-card__meta">
+            <span class="blog-card__tag">Direito Civil</span>
+            <time class="blog-card__date" datetime="2025-01-15">15 jan. 2025</time>
+          </div>
+          <h3 class="blog-card__title">O que fazer quando o locador não devolve o depósito?</h3>
+          <p class="blog-card__excerpt">Saiba quais são seus direitos como inquilino e o que fazer quando o proprietário se recusa a devolver o valor de caução ao final do contrato de locação.</p>
+          <a href="blog/artigo-modelo.html" class="blog-card__link">Ler artigo →</a>
+        </article>
+
+        <!-- ARTIGO 2: Direito Trabalhista -->
+        <article class="blog-card">
+          <div class="blog-card__meta">
+            <span class="blog-card__tag">Direito Trabalhista</span>
+            <time class="blog-card__date" datetime="2025-02-10">10 fev. 2025</time>
+          </div>
+          <h3 class="blog-card__title">Horas extras: quando a empresa é obrigada a pagar?</h3>
+          <p class="blog-card__excerpt">Entenda os limites legais da jornada de trabalho, como calcular horas extras e quando você tem direito ao pagamento adicional ou compensação em banco de horas.</p>
+          <a href="blog/artigo-modelo.html" class="blog-card__link">Ler artigo →</a>
+        </article>
+
+        <!-- ARTIGO 3: Direito Criminal -->
+        <article class="blog-card">
+          <div class="blog-card__meta">
+            <span class="blog-card__tag">Direito Criminal</span>
+            <time class="blog-card__date" datetime="2025-03-05">05 mar. 2025</time>
+          </div>
+          <h3 class="blog-card__title">Fui intimado pela polícia. Preciso de advogado?</h3>
+          <p class="blog-card__excerpt">Receber uma intimação policial pode ser desconcertante. Entenda a diferença entre testemunha e investigado, seus direitos constitucionais e por que ter assistência jurídica desde o início faz diferença.</p>
+          <a href="blog/artigo-modelo.html" class="blog-card__link">Ler artigo →</a>
+        </article>
+
+      </div>
+      <div class="blog__footer">
+        <a href="blog/index.html" class="btn-secondary">Ver todos os artigos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="starfield">
+    <div class="container">
+      <div class="contato__grid">
+        <div>
+          <p class="section-eyebrow contato__eyebrow">04 — fale conosco</p>
+          <h2 class="contato__title">Tire sua dúvida</h2>
+          <p class="contato__body">Entre em contato para uma consulta inicial. Respondo pessoalmente.</p>
+          <div class="contato__items">
+            <div class="contato__item">
+              <svg class="contato__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M5.5 22.5L6.5 17 2 12.5C2 7 6.5 2 12 2c5.5 0 10 4.5 10 10S17.5 22 12 22c-1.5 0-3-.4-4.3-1L5.5 22.5z" fill-opacity="0.1" stroke="currentColor" stroke-width="0"/>
+              </svg>
+              <div>
+                <p class="contato__item-label">WhatsApp</p>
+                <a href="https://wa.me/5511966180656" class="contato__item-value" target="_blank" rel="noopener">(11) 96618-0656</a>
+              </div>
+            </div>
+            <div class="contato__item">
+              <svg class="contato__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+              <div>
+                <p class="contato__item-label">Instagram</p>
+                <a href="https://instagram.com/Keh_Miyamoto" class="contato__item-value" target="_blank" rel="noopener">@Keh_Miyamoto</a>
+              </div>
+            </div>
+          </div>
+          <div class="contato__sep"></div>
+          <p class="contato__note">Sigilo profissional garantido. Atendimento mediante agendamento.</p>
+        </div>
+
+        <div class="contato__form-wrap">
+          <form id="contato-form" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="nome">Nome completo *</label>
+              <input class="form-input" type="text" id="nome" name="nome" required autocomplete="name">
+              <span class="form-error" id="nome-error">Por favor, insira seu nome.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">E-mail *</label>
+              <input class="form-input" type="email" id="email" name="email" required autocomplete="email">
+              <span class="form-error" id="email-error">Insira um e-mail válido.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="telefone">Telefone / WhatsApp</label>
+              <input class="form-input" type="tel" id="telefone" name="telefone" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="area">Área de interesse</label>
+              <select class="form-select" id="area" name="area">
+                <option value="">Selecione</option>
+                <option value="civil">Direito Civil</option>
+                <option value="criminal">Direito Criminal</option>
+                <option value="trabalhista">Direito Trabalhista</option>
+                <option value="outra">Outra</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mensagem">Descreva brevemente sua situação *</label>
+              <textarea class="form-textarea" id="mensagem" name="mensagem" required placeholder="Conte-me sobre o seu caso..."></textarea>
+              <span class="form-error" id="mensagem-error">Por favor, descreva sua situação.</span>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%">Enviar consulta</button>
+          </form>
+          <div class="form-success" id="form-success">
+            Mensagem recebida. Retorno em até 24 horas.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <p class="footer__brand-name">Miyamoto Advocacia</p>
+          <p class="footer__brand-desc">Direito Civil, Criminal e Trabalhista. São Paulo — SP.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Links rápidos</p>
+          <nav class="footer__links" aria-label="Links do rodapé">
+            <a href="#areas"   class="footer__link">Áreas</a>
+            <a href="#sobre"   class="footer__link">Sobre</a>
+            <a href="#blog"    class="footer__link">Blog</a>
+            <a href="#contato" class="footer__link">Contato</a>
+          </nav>
+        </div>
+        <div>
+          <p class="footer__col-title">Redes sociais</p>
+          <div class="footer__social">
+            <a href="https://wa.me/5511966180656" class="footer__social-item" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill-opacity="0.2" stroke="currentColor" stroke-width="0.5"/>
+              </svg>
+              WhatsApp
+            </a>
+            <a href="https://instagram.com/Keh_Miyamoto" class="footer__social-item" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+              @Keh_Miyamoto
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Miyamoto Advocacia. Todos os direitos reservados.</span>
+        <span>OAB/SP Nº 540.970</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÃO WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/5511966180656" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+    </svg>
+    <span class="whatsapp-fab__tooltip">Falar no WhatsApp</span>
+  </a>
+
+  <script src="js/nav.js"></script>
+  <script src="js/contato.js"></script>
+</body>
+</html>

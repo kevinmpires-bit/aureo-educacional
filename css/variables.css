@@ -1,0 +1,53 @@
+:root {
+  /* ── PALETA BASE (compartilhada) ── */
+  --gold:           #C8A84B;
+  --gold-light:     #E4C76B;
+  --gold-pale:      #F5E6B8;
+  --navy-deep:      #07122A;
+  --navy-primary:   #0B1C3B;
+  --navy-secondary: #0F2348;
+  --border-navy:    #1A3060;
+  --border-gold:    #C8A84B;
+  --white:          #FFFFFF;
+  --white-soft:     #F8F7F4;
+  --white-muted:    rgba(255,255,255,0.08);
+
+  /* ── TEMA ADVOCACIA ── */
+  --adv-bg:           #F8F7F4;
+  --adv-bg-alt:       #FFFFFF;
+  --adv-bg-dark:      #0B1C3B;
+  --adv-text:         #0B1C3B;
+  --adv-text-muted:   #4A6070;
+  --adv-border:       #DDD8CC;
+  --adv-border-dark:  #1A3060;
+
+  /* ── TEMA ÁUREO ── */
+  --bg-primary:     #0B1C3B;
+  --bg-secondary:   #0F2348;
+  --bg-deep:        #07122A;
+  --text-primary:   #FDFAF0;
+  --text-secondary: #A8BDD8;
+  --text-muted:     #4A6898;
+  --border-default: #1A3060;
+  --border-subtle:  rgba(26, 48, 96, 0.6);
+
+  /* ── TIPOGRAFIA ── */
+  --font-display: 'Gloock', serif;
+  --font-elegant: 'Poiret One', sans-serif;
+  --font-ui:      'Work Sans', sans-serif;
+
+  /* ── ESCALA ── */
+  --text-hero:    clamp(48px, 7vw, 88px);
+  --text-h1:      clamp(32px, 5vw, 52px);
+  --text-h2:      clamp(24px, 3.5vw, 36px);
+  --text-h3:      22px;
+  --text-tagline: clamp(14px, 2vw, 20px);
+  --text-body:    15px;
+  --text-label:   11px;
+
+  /* ── LAYOUT ── */
+  --radius:        0px;
+  --transition:    200ms ease;
+  --container-max: 1100px;
+  --section-gap:   96px;
+}
