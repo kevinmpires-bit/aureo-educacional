@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Habeas corpus: o que é e quando usar? Artigo jurídico do Dr. Kevin Miyamoto — Miyamoto Advocacia.">
+  <title>Habeas corpus: o que é e quando usar? — Miyamoto Advocacia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Work+Sans:wght@300;400;500&family=Poiret+One&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Work Sans',sans-serif;font-weight:400;font-size:15px;line-height:1.7;background:#0B1C3B;color:#FDFAF0;overflow-x:hidden}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
+    :root{
+      --gold:#C8A84B;--gold-hover:#E4C76B;--gold-dim:rgba(200,168,75,0.10);
+      --navy-deep:#07122A;--navy-main:#0B1C3B;--navy-alt:#0F2348;
+      --text-main:#FDFAF0;--text-sec:#A8BDD8;--text-muted:#4A6898;--border:#1A3060;
+      --font-d:'Gloock',serif;--font-e:'Poiret One',sans-serif;--font-ui:'Work Sans',sans-serif;
+      --t:200ms ease;--max:1100px;
+    }
+    .container{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+    @media(min-width:768px){.container{padding:0 40px}}
+    @media(min-width:1280px){.container{padding:0 60px}}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(7,18,42,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--max);margin:0 auto;padding:0 20px}
+    @media(min-width:768px){.nav__inner{padding:0 40px}}
+    .nav__logo{display:flex;align-items:center;gap:12px}
+    .nav__logo-img{width:30px;height:30px;object-fit:contain;opacity:0.9}
+    .nav__logo-text{font-family:var(--font-d);font-size:15px;color:var(--text-main);letter-spacing:0.05em;line-height:1.15}
+    .nav__logo-sub{display:block;font-family:var(--font-ui);font-size:9px;color:var(--gold);letter-spacing:0.2em;font-weight:500}
+    .nav__links{display:none;align-items:center;gap:28px}
+    @media(min-width:960px){.nav__links{display:flex}}
+    .nav__link{font-family:var(--font-ui);font-weight:500;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);transition:color var(--t)}
+    .nav__link:hover{color:var(--gold)}
+    .nav__aureo{display:none;font-family:var(--font-ui);font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:10px 20px;background:var(--gold);color:var(--navy-main);transition:background var(--t)}
+    .nav__aureo:hover{background:var(--gold-hover)}
+    @media(min-width:640px){.nav__aureo{display:inline-block}}
+    .nav__burger{display:flex;flex-direction:column;gap:5px;padding:8px}
+    @media(min-width:960px){.nav__burger{display:none}}
+    .nav__burger-line{display:block;width:22px;height:1px;background:var(--text-main);transition:all var(--t)}
+    .nav__burger.open .nav__burger-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
+    .nav__burger.open .nav__burger-line:nth-child(2){opacity:0}
+    .nav__burger.open .nav__burger-line:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .nav__mobile{position:fixed;inset:68px 0 0;background:var(--navy-deep);z-index:890;display:flex;flex-direction:column;padding:32px 24px;gap:4px;transform:translateX(100%);transition:transform 300ms ease;border-top:1px solid var(--border)}
+    .nav__mobile.open{transform:translateX(0)}
+    .nav__mobile-link{font-family:var(--font-ui);font-weight:500;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);padding:16px 0;border-bottom:1px solid var(--border);transition:color var(--t);min-height:44px;display:flex;align-items:center}
+    .nav__mobile-link:hover{color:var(--gold)}
+    .nav__mobile-cta{margin-top:24px;background:var(--gold);color:var(--navy-main);padding:16px;text-align:center;font-family:var(--font-ui);font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;min-height:44px;display:flex;align-items:center;justify-content:center}
+    .nav__mobile-cta:hover{background:var(--gold-hover)}
+
+    .artigo-hero{padding:120px 0 60px;background:var(--navy-main)}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--font-ui);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;flex-wrap:wrap}
+    .breadcrumb a{transition:color var(--t)}.breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb span{color:var(--border)}
+    .artigo-hero__cat{font-family:var(--font-ui);font-weight:500;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:inline-block;padding:4px 12px;background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.3)}
+    .artigo-hero__title{font-family:var(--font-d);font-size:clamp(28px,5vw,52px);color:var(--text-main);line-height:1.15;margin-bottom:20px;max-width:760px}
+    .artigo-hero__meta{font-family:var(--font-ui);font-weight:300;font-size:13px;color:var(--text-muted);letter-spacing:0.06em}
+
+    .artigo-body{padding:64px 0 96px;background:var(--navy-alt)}
+    .artigo-layout{display:grid;grid-template-columns:1fr;gap:48px}
+    @media(min-width:960px){.artigo-layout{grid-template-columns:1fr 340px;align-items:start}}
+
+    .artigo-content h2{font-family:var(--font-d);font-size:clamp(20px,3vw,28px);color:var(--gold);margin:40px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .artigo-content h3{font-family:var(--font-d);font-size:20px;color:var(--text-main);margin:32px 0 12px}
+    .artigo-content p{font-family:var(--font-ui);font-weight:300;font-size:15px;color:var(--text-sec);line-height:1.85;margin-bottom:20px}
+    .artigo-content strong{color:var(--text-main);font-weight:500}
+    .artigo-content ul{margin:0 0 20px 0;display:flex;flex-direction:column;gap:8px}
+    .artigo-content ul li{font-family:var(--font-ui);font-weight:300;font-size:15px;color:var(--text-sec);line-height:1.7;padding-left:20px;position:relative}
+    .artigo-content ul li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:1px;background:var(--gold)}
+    .artigo-content .destaque{background:var(--navy-main);border-left:3px solid var(--gold);padding:24px;margin:32px 0}
+    .artigo-content .destaque p{margin-bottom:0;color:var(--text-main)}
+
+    .artigo-sidebar{position:sticky;top:88px}
+    .cta-box{border:1px solid var(--gold);background:var(--navy-main);padding:32px}
+    .cta-box__title{font-family:var(--font-d);font-size:20px;color:var(--text-main);margin-bottom:12px}
+    .cta-box__text{font-family:var(--font-ui);font-weight:300;font-size:13px;color:var(--text-sec);line-height:1.7;margin-bottom:24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-ui);font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;padding:14px 24px;transition:all var(--t);border-radius:0;cursor:pointer;width:100%;text-align:center}
+    .btn-primary{background:var(--gold);color:var(--navy-main);border:1px solid var(--gold)}
+    .btn-primary:hover{background:var(--gold-hover);border-color:var(--gold-hover)}
+    .btn svg{width:16px;height:16px;flex-shrink:0}
+
+    .relacionados{background:var(--navy-main);padding:64px 0}
+    .relacionados__title{font-family:var(--font-d);font-size:clamp(22px,3vw,30px);color:var(--text-main);margin-bottom:40px}
+    .rel-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border)}
+    @media(min-width:640px){.rel-grid{grid-template-columns:repeat(2,1fr)}}
+    .rel-card{background:var(--navy-alt);padding:28px;border:1px solid transparent;transition:border-color var(--t)}
+    .rel-card:hover{border-color:var(--gold)}
+    .rel-card__badge{font-family:var(--font-ui);font-weight:500;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);display:inline-block;margin-bottom:12px}
+    .rel-card__title{font-family:var(--font-d);font-size:17px;color:var(--text-main);line-height:1.3;margin-bottom:16px}
+    .rel-card__link{font-family:var(--font-ui);font-weight:500;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);transition:color var(--t)}
+    .rel-card__link:hover{color:var(--gold-hover)}
+
+    .footer{background:var(--navy-deep);padding:48px 0 0}
+    .footer__bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;border-top:1px solid var(--border);font-family:var(--font-ui);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted)}
+
+    .whatsapp-fab{position:fixed;bottom:28px;right:24px;z-index:800;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.35);animation:waPulse 3s ease-in-out infinite;transition:transform var(--t)}
+    .whatsapp-fab:hover{transform:scale(1.08);animation:none}
+    .whatsapp-fab svg{width:26px;height:26px;fill:#FFF}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35)}50%{box-shadow:0 4px 36px rgba(37,211,102,0.6);transform:scale(1.05)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+  </style>
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Navegação principal">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo" aria-label="Miyamoto Advocacia — início">
+        <img src="../assets/aureo_brasao_redondo.png" alt="" class="nav__logo-img" aria-hidden="true">
+        <span class="nav__logo-text">Miyamoto Advocacia<span class="nav__logo-sub">OAB/SP Nº 540.970</span></span>
+      </a>
+      <div class="nav__links" role="menubar">
+        <a href="../index.html#areas"   class="nav__link" role="menuitem">Áreas</a>
+        <a href="../index.html#sobre"   class="nav__link" role="menuitem">Sobre</a>
+        <a href="index.html"            class="nav__link" role="menuitem">Blog</a>
+        <a href="../index.html#contato" class="nav__link" role="menuitem">Contato</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <a href="../aureo/index.html" class="nav__aureo">Áureo Educacional →</a>
+        <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+          <span class="nav__burger-line"></span><span class="nav__burger-line"></span><span class="nav__burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="mobile-nav">
+    <a href="../index.html#areas"   class="nav__mobile-link" onclick="closeMenu()">Áreas</a>
+    <a href="../index.html#sobre"   class="nav__mobile-link" onclick="closeMenu()">Sobre</a>
+    <a href="index.html"            class="nav__mobile-link" onclick="closeMenu()">Blog</a>
+    <a href="../index.html#contato" class="nav__mobile-link" onclick="closeMenu()">Contato</a>
+    <a href="../aureo/index.html" class="nav__mobile-cta">Áureo Educacional →</a>
+  </div>
+
+  <div class="artigo-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Localização">
+        <a href="../index.html">Início</a><span>›</span>
+        <a href="index.html">Blog</a><span>›</span>
+        <span style="color:var(--text-sec)">Habeas Corpus</span>
+      </nav>
+      <span class="artigo-hero__cat">Direito Criminal</span>
+      <h1 class="artigo-hero__title">Habeas corpus: o que é e quando usar?</h1>
+      <p class="artigo-hero__meta">Dr. Kevin Miyamoto · 10 de fevereiro de 2025 · 5 min de leitura</p>
+    </div>
+  </div>
+
+  <div class="artigo-body">
+    <div class="container">
+      <div class="artigo-layout">
+        <article class="artigo-content">
+          <p>Poucas expressões jurídicas são tão conhecidas pelo público em geral quanto o <strong>habeas corpus</strong>. Ela aparece em notícias, séries policiais e conversas cotidianas — mas muita gente não sabe exatamente o que significa, quando pode ser usado e quem pode impetrar um.</p>
+
+          <h2>O que é habeas corpus?</h2>
+          <p>Habeas corpus é uma expressão em latim que significa, literalmente, <strong>"que tenhas o teu corpo"</strong>. É uma ação judicial cujo único objetivo é proteger a liberdade de locomoção — o direito de ir e vir — contra restrições ilegais ou abusivas.</p>
+          <p>A Constituição Federal de 1988 prevê o habeas corpus no art. 5º, LXVIII: <strong>"Conceder-se-á habeas corpus sempre que alguém sofrer ou se achar ameaçado de sofrer violência ou coação em sua liberdade de locomoção, por ilegalidade ou abuso de poder."</strong></p>
+          <p>Repare nos dois casos que a Constituição cobre: quando a pessoa <em>já está</em> com a liberdade restrita (habeas corpus liberatório) e quando ela está <em>ameaçada</em> de ser presa (habeas corpus preventivo).</p>
+
+          <h2>Quando o habeas corpus pode ser usado?</h2>
+          <p>O habeas corpus é cabível em situações concretas de restrição ou ameaça à liberdade. Os exemplos mais comuns são:</p>
+          <ul>
+            <li>Prisão em flagrante ilegal — quando os requisitos legais não foram respeitados.</li>
+            <li>Prisão preventiva decretada sem fundamentação adequada ou sem os pressupostos do art. 312 do CPP.</li>
+            <li>Excesso de prazo na prisão provisória.</li>
+            <li>Prisão cumprida em local diferente do determinado ou em condições ilegais.</li>
+            <li>Pena já cumprida, mas o sistema ainda registra o cumprimento pendente.</li>
+            <li>Internação involuntária irregular (em casos de saúde mental).</li>
+          </ul>
+
+          <div class="destaque">
+            <p>Importante: o habeas corpus <strong>não</strong> serve para discutir a inocência do acusado, reexaminar provas ou reformar a sentença de mérito. Ele é uma ação de caráter urgente voltada exclusivamente para a legalidade da prisão.</p>
+          </div>
+
+          <h2>Habeas corpus preventivo: dá para pedir antes de ser preso?</h2>
+          <p>Sim. Quando há fundado receio de uma prisão ilegal — por exemplo, quando existe um inquérito em andamento e há indícios de que um mandado ilegal será expedido — é possível impetrar habeas corpus preventivo para que o juiz determine um <strong>salvo-conduto</strong>, impedindo a prisão.</p>
+          <p>Essa modalidade é especialmente relevante em casos de superposição de investigações ou quando a autoridade policial demonstra intenção clara de efetuar uma prisão sem base legal.</p>
+
+          <h2>Quem pode impetrar um habeas corpus?</h2>
+          <p>Qualquer pessoa — inclusive o próprio preso, sem assistência de advogado — pode impetrar habeas corpus. O Código de Processo Penal é expresso nesse ponto: não é necessário ser advogado para ajuizar a ação.</p>
+          <p>Na prática, porém, ter um advogado experiente faz toda a diferença. O habeas corpus mal fundamentado pode ser negado — e em casos de urgência, cada detalhe técnico importa.</p>
+
+          <h2>Onde o habeas corpus é julgado?</h2>
+          <p>Depende de quem praticou o ato que se pretende impugnar:</p>
+          <ul>
+            <li>Juiz de primeira instância como autoridade coatora → julgado pelo Tribunal de Justiça (TJ) ou Tribunal Regional Federal (TRF).</li>
+            <li>Tribunal de Justiça como autoridade coatora → julgado pelo Superior Tribunal de Justiça (STJ).</li>
+            <li>STJ como autoridade coatora → julgado pelo Supremo Tribunal Federal (STF).</li>
+            <li>Quando envolve diretamente a Constituição Federal → pode ir diretamente ao STF.</li>
+          </ul>
+
+          <h2>E se o habeas corpus for negado em todas as instâncias?</h2>
+          <p>Em casos envolvendo tratados internacionais de direitos humanos ratificados pelo Brasil, é possível levar a questão a organismos internacionais, como a Comissão Interamericana de Direitos Humanos da OEA. Isso é raro e ocorre em casos graves de violação sistemática de direitos.</p>
+          <p>No âmbito nacional, quando o habeas corpus é negado, ainda é possível recorrer por meio de recurso ordinário constitucional (ROC) ao STF ou STJ, dependendo do tribunal de origem.</p>
+
+          <h2>O que fazer se você ou alguém que você conhece está preso ilegalmente?</h2>
+          <p>O primeiro passo é contatar um advogado criminalista imediatamente. O habeas corpus é uma ação urgente — quanto mais rápido for impetrado, maior a chance de liberdade em menos tempo. Reúna as informações básicas: nome completo do preso, número do processo ou boletim de ocorrência, delegacia ou estabelecimento onde está recolhido e os motivos da prisão.</p>
+        </article>
+
+        <aside class="artigo-sidebar">
+          <div class="cta-box">
+            <h3 class="cta-box__title">Precisa de defesa criminal?</h3>
+            <p class="cta-box__text">Fale diretamente com o Dr. Kevin Miyamoto. Atendimento imediato em casos urgentes.</p>
+            <a href="https://wa.me/5511966180656" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Falar com o advogado no WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              FALAR COM O ADVOGADO
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <section class="relacionados">
+    <div class="container">
+      <h2 class="relacionados__title">Artigos relacionados</h2>
+      <div class="rel-grid">
+        <a href="artigo-1.html" class="rel-card">
+          <span class="rel-card__badge">Direito Civil</span>
+          <h3 class="rel-card__title">O que é responsabilidade civil e quando você pode pedir indenização?</h3>
+          <span class="rel-card__link">LER ARTIGO →</span>
+        </a>
+        <a href="artigo-3.html" class="rel-card">
+          <span class="rel-card__badge">Direito Trabalhista</span>
+          <h3 class="rel-card__title">Rescisão indireta: quando o empregado pode pedir demissão e receber como se fosse demitido?</h3>
+          <span class="rel-card__link">LER ARTIGO →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2025 Miyamoto Advocacia. Todos os direitos reservados.</span>
+        <span>OAB/SP Nº 540.970</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5511966180656" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+  </a>
+
+  <script>
+  var burger=document.getElementById('burger'),nav=document.getElementById('mobile-nav'),open=false;
+  function closeMenu(){open=false;burger.classList.remove('open');nav.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  burger.addEventListener('click',function(){open=!open;burger.classList.toggle('open');nav.classList.toggle('open');burger.setAttribute('aria-expanded',open?'true':'false');document.body.style.overflow=open?'hidden':'';});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open)closeMenu();});
+  </script>
+</body>
+</html>
