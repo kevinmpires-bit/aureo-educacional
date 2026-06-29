@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A Forja — Plataforma de questões comentadas da OAB 1ª fase. Treine por matéria e veja onde precisa evoluir.">
+  <title>A Forja — Áureo Educacional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Work+Sans:wght@300;400;500&family=Poiret+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/aureo.css">
+  <style>
+    /* ── FORJA — estilos exclusivos ── */
+    .forja-hero {
+      min-height: 60vh;
+      background: var(--bg-primary);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 20px 80px; position: relative; overflow: hidden;
+    }
+    .forja-hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 8% 12%, rgba(245,230,184,0.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 58%, rgba(245,230,184,0.30) 0%, transparent 100%),
+        radial-gradient(2px 2px at 38% 28%, rgba(245,230,184,0.40) 0%, transparent 100%),
+        radial-gradient(1px 1px at 52% 78%, rgba(245,230,184,0.30) 0%, transparent 100%),
+        radial-gradient(1px 1px at 68% 18%, rgba(245,230,184,0.50) 0%, transparent 100%),
+        radial-gradient(2px 2px at 83% 52%, rgba(245,230,184,0.30) 0%, transparent 100%),
+        radial-gradient(1px 1px at 14% 82%, rgba(245,230,184,0.40) 0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 9%,  rgba(245,230,184,0.30) 0%, transparent 100%),
+        radial-gradient(1px 1px at 47% 43%, rgba(245,230,184,0.20) 0%, transparent 100%),
+        radial-gradient(2px 2px at 31% 67%, rgba(245,230,184,0.35) 0%, transparent 100%);
+    }
+    .forja-hero__inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .forja-hero__rule { display: flex; flex-direction: column; gap: 7px; width: 180px; margin: 0 auto 24px; }
+    .forja-hero__rule span:nth-child(1),
+    .forja-hero__rule span:nth-child(3) { display: block; height: 1px; background: var(--gold); }
+    .forja-hero__rule span:nth-child(2) { display: block; height: 1px; background: var(--gold-pale); opacity: 0.4; }
+    .forja-hero__eyebrow {
+      font-family: var(--font-ui); font-weight: 500; font-size: 11px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px;
+    }
+    .forja-hero__title {
+      font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px);
+      color: var(--gold); line-height: 1; margin-bottom: 20px; letter-spacing: 0.04em;
+    }
+    .forja-hero__subtitle {
+      font-family: var(--font-elegant); font-size: clamp(14px, 2vw, 20px);
+      color: var(--gold-pale); letter-spacing: 0.1em; margin-bottom: 24px;
+    }
+    .forja-hero__body {
+      font-family: var(--font-ui); font-weight: 300; font-size: 16px;
+      color: var(--text-secondary); line-height: 1.75; max-width: 560px; margin: 0 auto;
+    }
+
+    /* ── FILTROS ── */
+    .forja-filtros { background: var(--bg-secondary); padding: var(--section-gap) 0; }
+    .forja-filtros__header { margin-bottom: 48px; }
+    .forja-filtros__eyebrow {
+      font-family: var(--font-ui); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+    }
+    .forja-filtros__title {
+      font-family: var(--font-display); font-size: var(--text-h2); color: var(--gold); margin-bottom: 0;
+    }
+    .forja-filtros__body { max-width: 560px; }
+    .forja-label {
+      font-family: var(--font-ui); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+      display: block; margin-bottom: 12px;
+    }
+    .forja-select {
+      width: 100%; background: var(--bg-deep); border: 1px solid var(--border-default);
+      border-radius: 0; padding: 14px 40px 14px 16px; color: var(--text-primary);
+      font-family: var(--font-ui); font-weight: 400; font-size: 15px;
+      -webkit-appearance: none; appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6898' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+      transition: border-color 200ms ease;
+    }
+    .forja-select:focus { border-color: var(--gold); outline: none; }
+    .forja-select option { background: var(--bg-deep); }
+    .forja-qtd-group { display: flex; gap: 0; flex-wrap: wrap; }
+    .forja-qtd-btn {
+      font-family: var(--font-ui); font-weight: 500; font-size: 13px;
+      letter-spacing: 0.12em; padding: 12px 24px; border: 1px solid var(--border-default);
+      border-right: none; background: transparent; color: var(--text-muted);
+      cursor: pointer; transition: all 200ms ease; min-height: 44px; border-radius: 0;
+    }
+    .forja-qtd-btn:last-child { border-right: 1px solid var(--border-default); }
+    .forja-qtd-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .forja-qtd-btn.active { background: var(--gold); color: var(--bg-primary); border-color: var(--gold); }
+    .forja-filtros__row { margin-bottom: 32px; }
+    .forja-filtros__action { margin-top: 40px; }
+
+    /* ── ARENA ── */
+    .forja-arena { background: var(--bg-primary); padding: var(--section-gap) 0; display: none; }
+    .forja-arena.visible { display: block; }
+    .forja-progress-wrap { margin-bottom: 32px; }
+    .forja-progress-label {
+      font-family: var(--font-ui); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 10px; display: flex; justify-content: space-between;
+    }
+    .forja-progress-bar { height: 2px; background: var(--border-default); }
+    .forja-progress-fill { height: 100%; background: var(--gold); transition: width 300ms ease; }
+
+    .forja-card { border: 1px solid var(--border-default); background: var(--bg-secondary); padding: 40px; }
+    .forja-card__badge {
+      display: inline-block; font-family: var(--font-ui); font-weight: 500;
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 2px; background: var(--gold);
+      color: var(--bg-primary); margin-bottom: 24px;
+    }
+    .forja-card__enunciado {
+      font-family: var(--font-ui); font-weight: 400; font-size: 15px;
+      color: var(--text-primary); line-height: 1.8; margin-bottom: 32px;
+    }
+    .forja-alternativas { display: flex; flex-direction: column; gap: 8px; }
+    .forja-alt {
+      display: flex; align-items: flex-start; gap: 16px;
+      border: 1px solid var(--border-default); background: transparent;
+      padding: 16px 20px; cursor: pointer; text-align: left; width: 100%;
+      transition: border-color 200ms ease, background 200ms ease; border-radius: 0;
+    }
+    .forja-alt:hover:not(:disabled) { border-color: var(--gold); }
+    .forja-alt__letra { font-family: var(--font-display); font-size: 16px; color: var(--gold); flex-shrink: 0; width: 20px; line-height: 1.5; }
+    .forja-alt__texto { font-family: var(--font-ui); font-weight: 300; font-size: 14px; color: var(--text-secondary); line-height: 1.65; flex: 1; }
+    .forja-alt__icone { flex-shrink: 0; font-size: 16px; display: none; }
+    .forja-alt.correta { border-color: #4CAF50; background: rgba(76,175,80,0.08); }
+    .forja-alt.correta .forja-alt__texto { color: var(--text-primary); }
+    .forja-alt.correta .forja-alt__icone { display: block; color: #4CAF50; }
+    .forja-alt.errada { border-color: #EF5350; background: rgba(239,83,80,0.08); }
+    .forja-alt.errada .forja-alt__texto { color: var(--text-primary); }
+    .forja-alt.errada .forja-alt__icone { display: block; color: #EF5350; }
+
+    .forja-fundamentacao { display: none; margin-top: 32px; opacity: 0; transition: opacity 300ms ease; }
+    .forja-fundamentacao.visible { display: block; opacity: 1; }
+    .forja-fund__sep { height: 1px; background: var(--gold); margin-bottom: 20px; }
+    .forja-fund__label {
+      font-family: var(--font-ui); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+    .forja-fund__texto {
+      font-family: var(--font-ui); font-weight: 300; font-size: 15px;
+      color: var(--text-secondary); line-height: 1.75;
+      background: var(--bg-deep); padding: 24px; border-left: 3px solid var(--gold);
+    }
+    .forja-next-wrap { margin-top: 32px; display: flex; justify-content: flex-end; }
+
+    /* ── RESULTADO ── */
+    .forja-resultado { background: var(--bg-primary); padding: var(--section-gap) 0; display: none; }
+    .forja-resultado.visible { display: block; }
+    .forja-resultado__titulo { font-family: var(--font-display); font-size: var(--text-h1); color: var(--gold); margin-bottom: 8px; }
+    .forja-resultado__placar { font-family: var(--font-display); font-size: clamp(64px, 10vw, 120px); color: var(--gold); line-height: 1; margin: 24px 0 8px; }
+    .forja-resultado__pct { font-family: var(--font-ui); font-weight: 300; font-size: 18px; color: var(--text-secondary); margin-bottom: 8px; }
+    .forja-resultado__msg { font-family: var(--font-elegant); font-size: clamp(14px, 2vw, 18px); color: var(--gold-pale); letter-spacing: 0.08em; margin-bottom: 48px; }
+    .forja-resultado__sep { height: 1px; background: var(--border-default); margin: 40px 0; }
+    .forja-resumo { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+    .forja-resumo__item {
+      display: flex; align-items: center; gap: 16px; padding: 12px 16px;
+      border: 1px solid var(--border-default); background: var(--bg-secondary);
+    }
+    .forja-resumo__num { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); width: 24px; }
+    .forja-resumo__icone { font-size: 16px; flex-shrink: 0; }
+    .forja-resumo__icone.ok { color: #4CAF50; }
+    .forja-resumo__icone.err { color: #EF5350; }
+    .forja-resumo__materia { font-family: var(--font-ui); font-weight: 500; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); flex: 1; }
+    .forja-resultado__btns { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 40px; }
+    .forja-gabaritos { display: none; }
+    .forja-gabaritos.visible { display: block; }
+    .forja-gab-item { border: 1px solid var(--border-default); background: var(--bg-secondary); padding: 24px; margin-bottom: 16px; border-left: 3px solid var(--gold); }
+    .forja-gab-item__header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .forja-gab-item__num { font-family: var(--font-display); font-size: 14px; color: var(--text-muted); }
+    .forja-gab-item__enunciado { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px; }
+    .forja-gab-item__resp { font-family: var(--font-ui); font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .forja-gab-item__fund { font-size: 13px; color: var(--text-muted); line-height: 1.65; background: var(--bg-deep); padding: 16px; border-left: 2px solid var(--gold); }
+
+    .forja-cta-wrap { background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 40px; text-align: center; margin-top: 64px; }
+    .forja-cta-wrap h3 { font-family: var(--font-display); font-size: var(--text-h2); color: var(--gold); margin-bottom: 12px; }
+    .forja-cta-wrap p { font-weight: 300; font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; }
+
+    @media (max-width: 767px) {
+      .forja-card { padding: 24px 20px; }
+      .forja-alt { padding: 14px 16px; }
+      .forja-resultado__btns { flex-direction: column; }
+      .forja-resultado__btns .btn-primary,
+      .forja-resultado__btns .btn-secondary { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="nav" role="navigation" aria-label="Navegação principal">
+    <div class="nav__inner">
+      <div class="nav__left">
+        <a href="../index.html" class="nav__back">← Advocacia</a>
+        <a href="index.html" class="nav__logo" aria-label="Áureo — página inicial">
+          <img src="../assets/aureo_brasao_redondo.png" alt="Brasão Áureo">
+        </a>
+      </div>
+      <div class="nav__links" role="menubar">
+        <a href="produtos.html" class="nav__link" role="menuitem">Produtos</a>
+        <a href="forja.html"    class="nav__link active" role="menuitem">A Forja</a>
+        <a href="planos.html"   class="nav__link" role="menuitem">Planos</a>
+        <a href="sobre.html"    class="nav__link" role="menuitem">Sobre</a>
+        <a href="contato.html"  class="nav__link" role="menuitem">Contato</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Menu de navegação">
+    <a href="produtos.html" class="nav__mobile-link">Produtos</a>
+    <a href="forja.html"    class="nav__mobile-link">A Forja</a>
+    <a href="planos.html"   class="nav__mobile-link">Planos</a>
+    <a href="sobre.html"    class="nav__mobile-link">Sobre</a>
+    <a href="contato.html"  class="nav__mobile-link">Contato</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="forja-hero">
+    <div class="forja-hero__inner">
+      <div class="forja-hero__rule"><span></span><span></span><span></span></div>
+      <p class="forja-hero__eyebrow">VI — A FORJA</p>
+      <h1 class="forja-hero__title">A FORJA</h1>
+      <p class="forja-hero__subtitle">Tempere seu conhecimento. Forje sua aprovação.</p>
+      <p class="forja-hero__body">Questões comentadas da OAB 1ª fase com fundamentação jurídica completa. Escolha a matéria, responda e veja onde precisa evoluir.</p>
+    </div>
+  </section>
+
+  <!-- FILTROS -->
+  <section class="forja-filtros" id="forja-filtros">
+    <div class="container">
+      <div class="forja-filtros__header">
+        <p class="forja-filtros__eyebrow">01 — configure seu simulado</p>
+        <h2 class="forja-filtros__title">Escolha sua batalha</h2>
+      </div>
+      <div class="forja-filtros__body">
+        <div class="forja-filtros__row">
+          <label class="forja-label" for="materia-select">Matéria</label>
+          <select class="forja-select" id="materia-select">
+            <option value="todas">Todas as matérias</option>
+            <option value="Ética Profissional">Ética Profissional</option>
+            <option value="Direito Constitucional">Direito Constitucional</option>
+            <option value="Direito Civil">Direito Civil</option>
+            <option value="Direito Penal">Direito Penal</option>
+            <option value="Direito do Trabalho">Direito do Trabalho</option>
+          </select>
+        </div>
+        <div class="forja-filtros__row">
+          <span class="forja-label">Quantidade de questões</span>
+          <div class="forja-qtd-group" role="group" aria-label="Quantidade de questões">
+            <button class="forja-qtd-btn" data-qtd="5"  onclick="selecionarQtd(this)">5</button>
+            <button class="forja-qtd-btn active" data-qtd="10" onclick="selecionarQtd(this)">10</button>
+            <button class="forja-qtd-btn" data-qtd="15" onclick="selecionarQtd(this)">15</button>
+            <button class="forja-qtd-btn" data-qtd="20" onclick="selecionarQtd(this)">20</button>
+          </div>
+        </div>
+        <div class="forja-filtros__action">
+          <button class="btn-primary" onclick="iniciarSimulado()">INICIAR SIMULADO</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARENA -->
+  <section class="forja-arena" id="forja-arena">
+    <div class="container">
+      <div class="forja-progress-wrap">
+        <div class="forja-progress-label">
+          <span id="arena-contador">QUESTÃO 1 DE 10</span>
+          <span id="arena-materia-label"></span>
+        </div>
+        <div class="forja-progress-bar">
+          <div class="forja-progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="forja-card" id="forja-card"></div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="forja-resultado" id="forja-resultado">
+    <div class="container">
+      <p class="forja-filtros__eyebrow" style="margin-bottom:12px">SIMULADO CONCLUÍDO</p>
+      <h2 class="forja-resultado__titulo">Resultado</h2>
+      <div class="forja-resultado__placar" id="placar-display">—</div>
+      <p class="forja-resultado__pct" id="pct-display"></p>
+      <p class="forja-resultado__msg" id="msg-display"></p>
+      <div class="forja-resultado__sep"></div>
+      <div class="forja-resumo" id="forja-resumo"></div>
+      <div class="forja-resultado__btns">
+        <button class="btn-primary"   onclick="novoSimulado()">NOVO SIMULADO</button>
+        <button class="btn-secondary" onclick="toggleGabaritos(this)">VER GABARITOS</button>
+      </div>
+      <div class="forja-gabaritos" id="forja-gabaritos"></div>
+      <div class="forja-cta-wrap">
+        <h3>Quer ir além?</h3>
+        <p>Conheça os outros instrumentos do Áureo e leve sua preparação ao próximo nível.</p>
+        <a href="produtos.html" class="btn-primary">VER TODOS OS PRODUTOS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__logo">
+            <img src="../assets/aureo_brasao_redondo.png" alt="Brasão Áureo">
+          </div>
+          <p class="footer__lema">Sapientia · Virtus · Honor</p>
+          <p class="footer__desc">Preparatório para OAB e concursos públicos.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Navegação</p>
+          <nav class="footer__links" aria-label="Links do rodapé">
+            <a href="index.html"    class="footer__link">Início</a>
+            <a href="produtos.html" class="footer__link">Produtos</a>
+            <a href="forja.html"    class="footer__link">A Forja</a>
+            <a href="planos.html"   class="footer__link">Planos</a>
+            <a href="sobre.html"    class="footer__link">Sobre</a>
+            <a href="contato.html"  class="footer__link">Contato</a>
+          </nav>
+        </div>
+        <div>
+          <p class="footer__col-title">Redes sociais</p>
+          <div class="footer__social">
+            <a href="https://wa.me/5511966180656" class="footer__social-item" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg class="footer__social-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              (11) 96618-0656
+            </a>
+            <a href="https://instagram.com/Aureo_Educacional" class="footer__social-item" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+              @Aureo_Educacional
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">© 2025 Áureo Educacional.</div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script>
+  var questoes = [
+    {
+      id: 1, materia: "Ética Profissional",
+      enunciado: "Advogado constituído pelo cliente recebe proposta de acordo da parte adversa diretamente, sem intermediação de outro advogado. Segundo o Código de Ética e Disciplina da OAB, como deve proceder o advogado?",
+      alternativas: {
+        A: "Pode negociar diretamente com a parte adversa, desde que informe o cliente posteriormente.",
+        B: "Deve recusar-se a negociar diretamente com a parte adversa e comunicar imediatamente ao seu cliente.",
+        C: "Pode aceitar a proposta se o valor for favorável ao cliente, independentemente da intermediação.",
+        D: "Deve encaminhar a proposta ao juízo da causa para homologação, sem comunicar o cliente.",
+        E: "Pode negociar diretamente, desde que obtenha autorização expressa por escrito do cliente em momento posterior."
+      },
+      correta: "B",
+      fundamentacao: "Nos termos do art. 34, VI, do Estatuto da OAB (Lei 8.906/94) e do art. 4º do Código de Ética e Disciplina, é vedado ao advogado entrar em contato direto com a parte adversa que possui patrono constituído. O advogado deve preservar a intermediação e comunicar imediatamente o cliente acerca de qualquer proposta recebida."
+    },
+    {
+      id: 2, materia: "Ética Profissional",
+      enunciado: "Carlos, advogado, está patrocinando ação indenizatória movida por Maria contra uma empresa. No curso do processo, Carlos descobre que a empresa é também cliente de seu sócio de escritório. Com base no Estatuto da OAB, Carlos:",
+      alternativas: {
+        A: "Pode continuar representando Maria, desde que informe ambos os clientes e obtenha consentimento.",
+        B: "Deve renunciar ao mandato de Maria imediatamente, sem qualquer obrigação de comunicação.",
+        C: "Deve comunicar a situação a ambos os clientes e, caso não haja acordo quanto à representação, renunciar ao mandato mais recente.",
+        D: "Pode continuar representando Maria, pois a vedação se aplica apenas a advogados individuais, não a sócios.",
+        E: "Deve aguardar determinação judicial para prosseguir ou não com a representação."
+      },
+      correta: "C",
+      fundamentacao: "O art. 18 do Estatuto da OAB (Lei 8.906/94) veda a representação de partes com interesses opostos no mesmo processo. O Código de Ética e Disciplina, em seu art. 15, determina que o advogado deve comunicar a situação conflituosa a todos os clientes envolvidos. O impedimento se estende aos sócios do mesmo escritório, conforme art. 34, XV, do Estatuto."
+    },
+    {
+      id: 3, materia: "Ética Profissional",
+      enunciado: "Sobre o sigilo profissional do advogado, assinale a alternativa correta:",
+      alternativas: {
+        A: "O sigilo profissional pode ser afastado por ordem judicial fundamentada, sem restrições.",
+        B: "O sigilo profissional é direito e dever do advogado, podendo ser quebrado apenas para evitar a prática de crime inafiançável.",
+        C: "O advogado não está obrigado a guardar sigilo sobre fatos que chegaram ao seu conhecimento antes da constituição do mandato.",
+        D: "O sigilo profissional cessa automaticamente com o término da relação cliente-advogado.",
+        E: "O sigilo profissional é dever do advogado e se estende a fatos de que tome conhecimento no exercício da profissão, permanecendo mesmo após o término do mandato."
+      },
+      correta: "E",
+      fundamentacao: "O art. 34, VII, do Estatuto da OAB e o art. 25 do Código de Ética e Disciplina estabelecem que o sigilo profissional é dever do advogado e abrange todos os fatos de que tome conhecimento no exercício da profissão, independentemente do término do mandato. O sigilo é perpétuo e não pode ser afastado nem por ordem judicial, sendo direito do cliente e dever do advogado."
+    },
+    {
+      id: 4, materia: "Ética Profissional",
+      enunciado: "Quanto à publicidade na advocacia, segundo o Código de Ética e Disciplina da OAB, é CORRETO afirmar que:",
+      alternativas: {
+        A: "É permitida a publicidade comparativa com outros advogados, desde que baseada em dados objetivos.",
+        B: "É vedada qualquer forma de publicidade, incluindo a manutenção de site na internet.",
+        C: "É permitida a publicidade informativa, vedada a publicidade mercantilista ou que prometa resultados.",
+        D: "É permitido ao advogado anunciar seu escritório em rádio e televisão, desde que em horário noturno.",
+        E: "É vedada a indicação de especialização, pois pode induzir o cliente a erro sobre a qualificação do advogado."
+      },
+      correta: "C",
+      fundamentacao: "O art. 39 do Código de Ética e Disciplina da OAB permite a publicidade informativa dos serviços advocatícios, vedando a publicidade mercantilista, a divulgação de valores de honorários, a captação de clientela e a promessa de resultados. A publicidade deve ser discreta e compatível com a dignidade da profissão, podendo incluir sites e redes sociais de caráter informativo."
+    },
+    {
+      id: 5, materia: "Ética Profissional",
+      enunciado: "João é advogado criminalista e foi contratado por Pedro para defendê-lo em processo por tráfico de drogas. Após alguns meses, João descobre que Pedro praticou o crime e que há provas que a defesa ainda não conhece. Com base na ética profissional, João deve:",
+      alternativas: {
+        A: "Comunicar imediatamente o Ministério Público sobre as provas e retirar-se do processo.",
+        B: "Continuar a defesa, pois o advogado não pode ser compelido a revelar fatos cobertos pelo sigilo profissional e tem o dever de defesa técnica.",
+        C: "Solicitar ao juiz autorização para retirar-se do processo sem qualquer justificativa.",
+        D: "Comunicar ao juiz que o cliente confessou o crime, para que a pena seja reduzida.",
+        E: "Renunciar ao mandato imediatamente e comunicar o ocorrido à OAB."
+      },
+      correta: "B",
+      fundamentacao: "O advogado tem o dever de defesa técnica de seu cliente, que é garantia constitucional (art. 5º, LV, CF/88). O art. 2º, parágrafo único, I, do Estatuto da OAB garante ao advogado a inviolabilidade por seus atos e manifestações no exercício da profissão. O fato de o cliente ser culpado não exime o advogado do dever de defesa. O sigilo profissional impede a revelação de qualquer informação obtida no exercício do mandato."
+    },
+    {
+      id: 6, materia: "Direito Constitucional",
+      enunciado: "Sobre o princípio da legalidade na Constituição Federal de 1988, é correto afirmar que:",
+      alternativas: {
+        A: "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei complementar.",
+        B: "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei, em qualquer de suas espécies normativas.",
+        C: "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei ordinária federal.",
+        D: "O princípio da legalidade aplica-se apenas à Administração Pública, não aos particulares.",
+        E: "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei, aplicando-se tal princípio somente em matéria penal."
+      },
+      correta: "B",
+      fundamentacao: "O art. 5º, II, da Constituição Federal de 1988 estabelece que 'ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei'. O Supremo Tribunal Federal interpreta 'lei' em sentido amplo, abrangendo todas as espécies normativas previstas no art. 59 da CF/88, como leis ordinárias, complementares, delegadas, medidas provisórias, decretos legislativos e resoluções."
+    },
+    {
+      id: 7, materia: "Direito Constitucional",
+      enunciado: "Sobre o mandado de injunção, conforme a Constituição Federal de 1988 e a jurisprudência do STF, assinale a alternativa correta:",
+      alternativas: {
+        A: "Tem por objetivo suprir a falta de norma regulamentadora que torne inviável o exercício de direitos constitucionais, sendo seus efeitos exclusivamente inter partes.",
+        B: "É instrumento cabível apenas para suprir omissão legislativa federal, não se aplicando à omissão de órgão estadual ou municipal.",
+        C: "Tem por objetivo suprir a falta de norma regulamentadora, podendo o STF fixar prazo para que o legislador supra a omissão, sob pena de declarar a inconstitucionalidade.",
+        D: "É instrumento voltado exclusivamente à tutela de direitos coletivos, não sendo cabível para a tutela de direitos individuais.",
+        E: "Tem por objetivo suprir a falta de norma regulamentadora que torne inviável o exercício de direitos constitucionais, podendo o STF editar a norma faltante com efeitos gerais, conforme entendimento consolidado."
+      },
+      correta: "E",
+      fundamentacao: "O art. 5º, LXXI, da CF/88 prevê o mandado de injunção quando a falta de norma regulamentadora tornar inviável o exercício de direitos e liberdades constitucionais. O STF, ao julgar os MIs 670, 708 e 712 (greve dos servidores públicos), adotou a corrente concretista geral, permitindo que o Tribunal edite a norma faltante com efeitos erga omnes. A Lei 13.300/2016 regulamentou o mandado de injunção, incorporando essa orientação."
+    },
+    {
+      id: 8, materia: "Direito Constitucional",
+      enunciado: "A respeito do controle de constitucionalidade, assinale a alternativa correta:",
+      alternativas: {
+        A: "O controle difuso de constitucionalidade somente pode ser exercido pelo STF.",
+        B: "No controle concentrado, a decisão do STF que declara a inconstitucionalidade de lei tem efeitos ex nunc e erga omnes, salvo modulação.",
+        C: "No controle difuso, a declaração de inconstitucionalidade somente produz efeitos entre as partes do processo, e a lei continua em vigor para os demais.",
+        D: "A ação declaratória de constitucionalidade pode ser proposta por qualquer cidadão, em defesa de lei federal impugnada.",
+        E: "O controle de constitucionalidade preventivo é exercido exclusivamente pelo Poder Judiciário."
+      },
+      correta: "C",
+      fundamentacao: "No controle difuso (ou concreto), qualquer juiz ou tribunal pode declarar a inconstitucionalidade de lei em um caso concreto. Entretanto, os efeitos da decisão são, em regra, inter partes e ex tunc (retroativos), não retirando a lei do ordenamento para os demais casos. Para que a lei seja retirada do ordenamento com efeitos gerais, é necessária a atuação do Senado Federal (art. 52, X, CF/88) ou que o STF confira efeitos erga omnes à sua decisão no controle difuso."
+    },
+    {
+      id: 9, materia: "Direito Constitucional",
+      enunciado: "Sobre os direitos e garantias fundamentais na CF/88, analise as assertivas e assinale a correta:",
+      alternativas: {
+        A: "Os direitos e garantias fundamentais expressos na Constituição excluem outros decorrentes do regime e dos princípios por ela adotados ou dos tratados internacionais.",
+        B: "Os tratados e convenções internacionais sobre direitos humanos, aprovados em cada Casa do Congresso Nacional em dois turnos, por três quintos dos votos, equivalem às emendas constitucionais.",
+        C: "As normas definidoras dos direitos e garantias fundamentais têm aplicabilidade imediata, exceto quando dependerem de regulamentação infraconstitucional.",
+        D: "É admitida a pena de morte no Brasil em qualquer hipótese, desde que prevista em lei.",
+        E: "Os direitos e garantias fundamentais são absolutos e não admitem restrições, mesmo em estado de defesa ou sítio."
+      },
+      correta: "B",
+      fundamentacao: "O art. 5º, §3º, da CF/88, inserido pela EC 45/2004, estabelece que os tratados e convenções internacionais sobre direitos humanos aprovados em cada Casa do Congresso Nacional em dois turnos, por três quintos dos votos dos respectivos membros, serão equivalentes às emendas constitucionais. O §2º do mesmo artigo prevê que os direitos expressos na CF não excluem outros decorrentes do regime, dos princípios ou de tratados internacionais."
+    },
+    {
+      id: 10, materia: "Direito Constitucional",
+      enunciado: "Sobre a organização dos Poderes na Constituição Federal, assinale a assertiva correta:",
+      alternativas: {
+        A: "O Poder Judiciário tem função típica de julgar e função atípica de legislar, sendo vedada qualquer função administrativa.",
+        B: "O princípio da separação dos Poderes é cláusula pétrea e impede qualquer forma de controle de um Poder sobre outro.",
+        C: "A separação dos Poderes não impede o exercício de funções atípicas, como a atividade normativa do Executivo e a função administrativa do Legislativo.",
+        D: "O Poder Legislativo tem função típica exclusiva de legislar, não podendo exercer função de fiscalização.",
+        E: "O princípio da separação dos Poderes impede que o Judiciário exerça qualquer forma de controle sobre atos do Executivo."
+      },
+      correta: "C",
+      fundamentacao: "O princípio da separação dos Poderes (art. 2º, CF/88) não implica separação absoluta e estanque de funções. Cada Poder tem uma função típica (predominante) e pode exercer funções atípicas. O Executivo exerce função normativa (medidas provisórias, decretos) e jurisdicional (julgamento administrativo). O Legislativo exerce função administrativa (organização interna) e quase-judicial (julgamento do Presidente). O Judiciário exerce funções administrativas e normativas (regimentos internos)."
+    },
+    {
+      id: 11, materia: "Direito Civil",
+      enunciado: "Sobre a prescrição no Código Civil, assinale a alternativa correta:",
+      alternativas: {
+        A: "A prescrição extingue o próprio direito subjetivo, impedindo qualquer forma de exercício posterior.",
+        B: "A prescrição extingue a pretensão e pode ser renunciada antecipadamente pelo devedor, antes de consumada.",
+        C: "A prescrição extingue a pretensão, não pode ser renunciada antes de consumada, mas pode sê-lo depois, desde que não prejudique terceiro.",
+        D: "A prescrição pode ser conhecida de ofício pelo juiz apenas nas causas em que figure como parte menor ou incapaz.",
+        E: "A prescrição e a decadência se confundem, pois ambas extinguem o direito subjetivo pelo decurso do tempo."
+      },
+      correta: "C",
+      fundamentacao: "O art. 189 do Código Civil (Lei 10.406/2002) define que a prescrição extingue a pretensão (e não o direito em si). O art. 209 veda a renúncia prévia à prescrição, admitindo-a apenas após consumada, desde que não prejudique terceiro. O art. 240 do CPC e o art. 191 do CC permitem que o juiz conheça a prescrição de ofício. A distinção entre prescrição e decadência está nos arts. 207 a 211 do CC."
+    },
+    {
+      id: 12, materia: "Direito Civil",
+      enunciado: "Em relação à responsabilidade civil objetiva no Código Civil de 2002, é correto afirmar que:",
+      alternativas: {
+        A: "A responsabilidade objetiva exige a demonstração de culpa lato sensu (dolo ou negligência) do agente.",
+        B: "A responsabilidade objetiva está prevista apenas no Código de Defesa do Consumidor, não no Código Civil.",
+        C: "Aquele que, por ato ilícito, causar dano a outrem fica obrigado a repará-lo, dispensando-se a prova da culpa nos casos especificados em lei ou quando a atividade implicar risco por sua natureza.",
+        D: "A responsabilidade objetiva admite a exclusão do nexo causal apenas por caso fortuito, não por força maior.",
+        E: "A responsabilidade civil objetiva não se aplica às pessoas jurídicas de direito público."
+      },
+      correta: "C",
+      fundamentacao: "O art. 927, parágrafo único, do Código Civil estabelece a responsabilidade objetiva quando a atividade normalmente desenvolvida pelo autor do dano implicar, por sua natureza, risco para os direitos de outrem, ou nos casos previstos em lei. Isso significa que, nessas hipóteses, o lesado não precisa provar culpa, apenas o dano e o nexo causal. A excludente se dá por caso fortuito, força maior, fato exclusivo da vítima ou de terceiro."
+    },
+    {
+      id: 13, materia: "Direito Civil",
+      enunciado: "Sobre o negócio jurídico e seus defeitos: Ana celebrou contrato de compra e venda de imóvel sob ameaça de grave mal a sua família, promovida por Carlos. O vício que macula o negócio é:",
+      alternativas: {
+        A: "Erro, pois Ana se equivocou sobre as qualidades do negócio.",
+        B: "Dolo, pois Carlos induziu Ana a praticar o ato com intenção de prejudicá-la.",
+        C: "Coação, pois Ana foi compelida a contratar por temor de dano iminente e considerável.",
+        D: "Lesão, pois houve desproporção entre as prestações decorrente de situação de necessidade.",
+        E: "Fraude contra credores, pois o ato reduziu a garantia dos credores de Ana."
+      },
+      correta: "C",
+      fundamentacao: "O art. 151 do Código Civil define coação como o temor de dano iminente e considerável à sua pessoa, à sua família ou aos seus bens, que vicie a manifestação de vontade. A ameaça de grave mal à família de Ana configura coação moral (vis compulsiva), que é vício do consentimento e causa de anulabilidade do negócio jurídico, conforme art. 171, II, do CC. O prazo decadencial para anulação é de 4 anos (art. 178, I, CC)."
+    },
+    {
+      id: 14, materia: "Direito Civil",
+      enunciado: "Sobre o direito de família no Código Civil, assinale a assertiva correta a respeito do regime de bens:",
+      alternativas: {
+        A: "O regime de comunhão universal de bens é o regime legal supletivo, aplicado quando os nubentes não fazem pacto antenupcial.",
+        B: "No regime de separação legal de bens, os cônjuges não podem praticar qualquer ato de alienação de imóvel sem a outorga do outro.",
+        C: "O regime de comunhão parcial de bens é o regime legal supletivo, comunicando-se os bens adquiridos na constância do casamento a título oneroso.",
+        D: "A separação obrigatória de bens aplica-se, entre outros casos, ao maior de 70 anos, mas não impede a comunicação de bens adquiridos pelo esforço comum.",
+        E: "O pacto antenupcial pode ser alterado, por consenso dos cônjuges, a qualquer tempo durante o casamento, independentemente de autorização judicial."
+      },
+      correta: "C",
+      fundamentacao: "O art. 1.640 do Código Civil estabelece que, não havendo convenção entre os nubentes, ou sendo ela nula ou ineficaz, vigorará quanto aos bens o regime da comunhão parcial. No regime de comunhão parcial (arts. 1.658 a 1.666 do CC), comunicam-se os bens adquiridos onerosamente na constância do casamento, excluindo-se os bens anteriores ao casamento e os adquiridos por herança ou doação."
+    },
+    {
+      id: 15, materia: "Direito Penal",
+      enunciado: "Sobre o iter criminis (caminho do crime), assinale a alternativa correta:",
+      alternativas: {
+        A: "A cogitação é punível quando revelar a intenção de praticar crime grave, como homicídio.",
+        B: "Os atos preparatórios são, em regra, puníveis, salvo nos crimes culposos.",
+        C: "A tentativa ocorre quando o agente inicia a execução do crime, mas não o consuma por circunstâncias alheias à sua vontade, sendo punida com a pena do crime consumado, sem redução.",
+        D: "A tentativa é punida com a pena correspondente ao crime consumado, diminuída de um a dois terços.",
+        E: "O crime impossível por ineficácia absoluta do meio é punido com pena reduzida."
+      },
+      correta: "D",
+      fundamentacao: "O art. 14, II, do Código Penal define tentativa como o início da execução do crime que não se consuma por circunstâncias alheias à vontade do agente. O art. 14, parágrafo único, determina que a pena da tentativa é a pena do crime consumado diminuída de um a dois terços. A cogitação e os atos preparatórios, em regra, não são puníveis. O crime impossível (art. 17 do CP) por ineficácia absoluta do meio ou impropriedade absoluta do objeto não é punível."
+    },
+    {
+      id: 16, materia: "Direito Penal",
+      enunciado: "Sobre as excludentes de ilicitude: Roberto, ao perceber que seria assaltado, empurra o assaltante, que cai e sofre lesões. O assaltante portava uma faca. Qual excludente de ilicitude se aplica?",
+      alternativas: {
+        A: "Estado de necessidade, pois Roberto sacrificou um bem jurídico para salvar outro.",
+        B: "Legítima defesa, pois Roberto repeliu injusta agressão atual com meios moderados.",
+        C: "Estrito cumprimento do dever legal, pois Roberto tinha obrigação legal de defender-se.",
+        D: "Exercício regular de direito, pois qualquer pessoa tem direito de defender seus bens.",
+        E: "Coação irresistível, pois Roberto agiu compelido por força física superior."
+      },
+      correta: "B",
+      fundamentacao: "O art. 25 do Código Penal define legítima defesa como o uso moderado dos meios necessários para repelir injusta agressão, atual ou iminente, a direito seu ou de outrem. No caso, o assaltante armado representa agressão injusta, atual e iminente. Roberto usou de meios moderados (empurrão) para repelir essa agressão. O estado de necessidade (art. 24 do CP) pressupõe conflito entre bens jurídicos de titulares distintos, sem que haja agressão humana como pressuposto."
+    },
+    {
+      id: 17, materia: "Direito Penal",
+      enunciado: "Em relação à aplicação da lei penal no tempo, assinale a assertiva correta:",
+      alternativas: {
+        A: "A lei penal mais grave aplica-se ao crime praticado durante sua vigência, mesmo que lei posterior seja mais benéfica ao réu.",
+        B: "A lei penal mais benéfica retroage para beneficiar o réu, mesmo após o trânsito em julgado da sentença condenatória.",
+        C: "A retroatividade da lei penal benéfica se aplica apenas antes do trânsito em julgado da condenação.",
+        D: "A lei penal temporária cessa seus efeitos com o decurso do prazo, não se aplicando aos fatos praticados durante sua vigência.",
+        E: "Em caso de conflito de leis penais no tempo, aplica-se sempre a lei posterior, independentemente de ser mais benéfica ou mais grave."
+      },
+      correta: "B",
+      fundamentacao: "O art. 5º, XL, da CF/88 e o art. 2º, parágrafo único, do Código Penal estabelecem que a lei penal mais benéfica retroage para beneficiar o réu, mesmo que já transitada em julgado a sentença condenatória. A Súmula 611 do STF confirma que 'transitada em julgado a sentença condenatória, compete ao Juízo das Execuções a aplicação de lei mais benigna'. As leis temporárias e excepcionais (art. 3º do CP) são ultrativas, aplicando-se aos fatos praticados durante sua vigência."
+    },
+    {
+      id: 18, materia: "Direito do Trabalho",
+      enunciado: "Sobre a jornada de trabalho, com base na CLT e na CF/88, assinale a alternativa correta:",
+      alternativas: {
+        A: "A duração normal do trabalho não excederá 6 horas diárias e 44 horas semanais.",
+        B: "A duração normal do trabalho não excederá 8 horas diárias e 40 horas semanais.",
+        C: "A duração normal do trabalho não excederá 8 horas diárias e 44 horas semanais, sendo permitidas horas extras até o limite de 2 horas por dia.",
+        D: "A duração normal do trabalho não excederá 8 horas diárias, não havendo limite semanal fixado na CF/88.",
+        E: "A duração normal do trabalho é de 44 horas semanais, sem limite de horas diárias, podendo o empregador distribuí-las livremente."
+      },
+      correta: "C",
+      fundamentacao: "O art. 7º, XIII, da CF/88 estabelece que a duração normal do trabalho não poderá ser superior a 8 horas diárias e 44 horas semanais, facultada a compensação de horários e a redução da jornada, mediante acordo ou convenção coletiva de trabalho. O art. 59 da CLT permite a prestação de horas extras até o limite de 2 horas por dia, com acréscimo mínimo de 50% sobre a hora normal (art. 7º, XVI, CF/88)."
+    },
+    {
+      id: 19, materia: "Direito do Trabalho",
+      enunciado: "Sobre as férias anuais do trabalhador urbano, segundo a CLT, assinale a alternativa correta:",
+      alternativas: {
+        A: "O empregado que faltar ao serviço de 6 a 14 dias no período aquisitivo terá direito a 24 dias corridos de férias.",
+        B: "As férias devem ser concedidas em até 12 meses após o término do período aquisitivo, podendo ser parceladas em até 3 períodos, desde que nenhum seja inferior a 5 dias.",
+        C: "O empregado tem direito a férias remuneradas com adicional de um terço, sendo vedado o parcelamento em qualquer hipótese.",
+        D: "O empregado perderá o direito a férias se faltar mais de 32 dias ao serviço no período aquisitivo.",
+        E: "As férias podem ser concedidas coletivamente, mas somente para todos os empregados de uma empresa, não por setor."
+      },
+      correta: "B",
+      fundamentacao: "O art. 134 da CLT, com a redação dada pela Reforma Trabalhista (Lei 13.467/2017), prevê que as férias devem ser concedidas por ato do empregador, em até 12 meses após o término do período aquisitivo (período concessivo). O art. 134, §1º, permite o parcelamento em até 3 períodos, desde que um deles não seja inferior a 14 dias corridos e os demais não sejam inferiores a 5 dias corridos cada um. O adicional de 1/3 é garantia constitucional (art. 7º, XVII, CF/88)."
+    },
+    {
+      id: 20, materia: "Direito do Trabalho",
+      enunciado: "Sobre a rescisão do contrato de trabalho por dispensa sem justa causa, assinale a alternativa correta:",
+      alternativas: {
+        A: "O empregado dispensado sem justa causa tem direito apenas ao saldo de salário e aviso prévio, sendo as demais verbas devidas somente na dispensa com justa causa.",
+        B: "O empregado dispensado sem justa causa tem direito ao saldo de salário, aviso prévio (indenizado ou trabalhado), férias proporcionais acrescidas de 1/3, 13º salário proporcional e FGTS com multa de 40%.",
+        C: "A multa de 40% sobre o FGTS é devida apenas quando o empregado tiver mais de 5 anos de serviço.",
+        D: "O aviso prévio na dispensa sem justa causa é sempre de 30 dias, independentemente do tempo de serviço.",
+        E: "O empregado dispensado sem justa causa perde o direito ao levantamento do FGTS se não movimentar a conta em 30 dias."
+      },
+      correta: "B",
+      fundamentacao: "Na dispensa sem justa causa, o empregado tem direito ao: saldo de salário (dias trabalhados no mês), aviso prévio proporcional ao tempo de serviço (art. 7º, XXI, CF/88 e Lei 12.506/2011), férias vencidas e proporcionais + 1/3 constitucional (art. 7º, XVII, CF/88), 13º salário proporcional (art. 7º, VIII, CF/88) e FGTS com multa de 40% (art. 7º, I, CF/88 e art. 18, §1º, Lei 8.036/90). O aviso prévio varia de 30 a 90 dias conforme o tempo de serviço."
+    }
+  ];
+
+  var estado = {
+    questoesSelecionadas: [],
+    indiceAtual: 0,
+    resultados: [],
+    qtd: 10,
+    respondida: false
+  };
+
+  function embaralhar(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function selecionarQtd(btn) {
+    document.querySelectorAll('.forja-qtd-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    estado.qtd = parseInt(btn.getAttribute('data-qtd'));
+  }
+
+  function filtrarQuestoes(materia, quantidade) {
+    var pool = materia === 'todas' ? questoes : questoes.filter(function(q) { return q.materia === materia; });
+    return embaralhar(pool).slice(0, Math.min(quantidade, pool.length));
+  }
+
+  function iniciarSimulado() {
+    var materia = document.getElementById('materia-select').value;
+    var selecionadas = filtrarQuestoes(materia, estado.qtd);
+    if (selecionadas.length === 0) { alert('Não há questões disponíveis para a matéria e quantidade selecionadas.'); return; }
+    estado.questoesSelecionadas = selecionadas;
+    estado.indiceAtual = 0;
+    estado.resultados = [];
+    estado.respondida = false;
+    document.getElementById('forja-filtros').style.display = 'none';
+    document.getElementById('forja-resultado').classList.remove('visible');
+    document.getElementById('forja-arena').classList.add('visible');
+    renderizarQuestao(0);
+    document.getElementById('forja-arena').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function renderizarQuestao(idx) {
+    estado.respondida = false;
+    var q = estado.questoesSelecionadas[idx];
+    var total = estado.questoesSelecionadas.length;
+    document.getElementById('arena-contador').textContent = 'QUESTÃO ' + (idx + 1) + ' DE ' + total;
+    document.getElementById('arena-materia-label').textContent = q.materia.toUpperCase();
+    document.getElementById('progress-fill').style.width = Math.round((idx / total) * 100) + '%';
+    var letras = ['A','B','C','D','E'];
+    var altsHtml = letras.map(function(l) {
+      return '<button class="forja-alt" onclick="responder(\'' + l + '\')" data-alt="' + l + '">' +
+        '<span class="forja-alt__letra">' + l + '</span>' +
+        '<span class="forja-alt__texto">' + q.alternativas[l] + '</span>' +
+        '<span class="forja-alt__icone"></span>' +
+      '</button>';
+    }).join('');
+    var proximoLabel = (idx + 1 < total) ? 'PRÓXIMA QUESTÃO' : 'VER RESULTADO';
+    var proximoFn = (idx + 1 < total) ? 'proximaQuestao()' : 'finalizarSimulado()';
+    document.getElementById('forja-card').innerHTML =
+      '<span class="forja-card__badge">' + q.materia + '</span>' +
+      '<p class="forja-card__enunciado">' + q.enunciado + '</p>' +
+      '<div class="forja-alternativas">' + altsHtml + '</div>' +
+      '<div class="forja-fundamentacao" id="fundamentacao-box">' +
+        '<div class="forja-fund__sep"></div>' +
+        '<p class="forja-fund__label">Fundamentação</p>' +
+        '<p class="forja-fund__texto">' + q.fundamentacao + '</p>' +
+      '</div>' +
+      '<div class="forja-next-wrap" id="next-wrap" style="display:none">' +
+        '<button class="btn-primary" onclick="' + proximoFn + '">' + proximoLabel + '</button>' +
+      '</div>';
+  }
+
+  function responder(letra) {
+    if (estado.respondida) return;
+    estado.respondida = true;
+    var q = estado.questoesSelecionadas[estado.indiceAtual];
+    var acertou = letra === q.correta;
+    estado.resultados.push({ acertou: acertou, materia: q.materia, enunciado: q.enunciado });
+    document.querySelectorAll('.forja-alt').forEach(function(btn) {
+      btn.disabled = true;
+      var l = btn.getAttribute('data-alt');
+      var icone = btn.querySelector('.forja-alt__icone');
+      if (l === q.correta) { btn.classList.add('correta'); icone.textContent = '✓'; }
+      else if (l === letra && !acertou) { btn.classList.add('errada'); icone.textContent = '✗'; }
+    });
+    var fundBox = document.getElementById('fundamentacao-box');
+    fundBox.style.display = 'block';
+    setTimeout(function() { fundBox.classList.add('visible'); }, 20);
+    document.getElementById('next-wrap').style.display = 'flex';
+  }
+
+  function proximaQuestao() {
+    estado.indiceAtual++;
+    renderizarQuestao(estado.indiceAtual);
+    document.getElementById('forja-arena').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function finalizarSimulado() {
+    var total = estado.questoesSelecionadas.length;
+    var acertos = estado.resultados.filter(function(r) { return r.acertou; }).length;
+    var pct = Math.round((acertos / total) * 100);
+    var msg = pct >= 70 ? 'O Pupilo demonstra domínio. Continue forjando.' :
+              pct >= 40 ? 'Bom início. A forja ainda tem trabalho a fazer.' :
+                          'O aço precisa de mais calor. Revise e retorne.';
+    document.getElementById('forja-arena').classList.remove('visible');
+    document.getElementById('forja-resultado').classList.add('visible');
+    document.getElementById('placar-display').textContent = acertos + ' / ' + total;
+    document.getElementById('pct-display').textContent = pct + '% de aproveitamento';
+    document.getElementById('msg-display').textContent = msg;
+    document.getElementById('forja-resumo').innerHTML = estado.resultados.map(function(r, i) {
+      return '<div class="forja-resumo__item">' +
+        '<span class="forja-resumo__num">' + (i+1) + '</span>' +
+        '<span class="forja-resumo__icone ' + (r.acertou ? 'ok' : 'err') + '">' + (r.acertou ? '✓' : '✗') + '</span>' +
+        '<span class="forja-resumo__materia">' + r.materia + '</span>' +
+      '</div>';
+    }).join('');
+    document.getElementById('forja-gabaritos').innerHTML = estado.questoesSelecionadas.map(function(q, i) {
+      return '<div class="forja-gab-item">' +
+        '<div class="forja-gab-item__header"><span class="forja-gab-item__num">' + (i+1) + '</span><span class="forja-card__badge">' + q.materia + '</span></div>' +
+        '<p class="forja-gab-item__enunciado">' + q.enunciado + '</p>' +
+        '<p class="forja-gab-item__resp" style="color:var(--gold)">Resposta correta: ' + q.correta + '</p>' +
+        '<p class="forja-gab-item__fund">' + q.fundamentacao + '</p>' +
+      '</div>';
+    }).join('');
+    document.getElementById('forja-resultado').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function novoSimulado() {
+    document.getElementById('forja-resultado').classList.remove('visible');
+    document.getElementById('forja-gabaritos').classList.remove('visible');
+    document.getElementById('forja-filtros').style.display = '';
+    document.getElementById('forja-filtros').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleGabaritos(btn) {
+    var gab = document.getElementById('forja-gabaritos');
+    var visivel = gab.classList.toggle('visible');
+    btn.textContent = visivel ? 'OCULTAR GABARITOS' : 'VER GABARITOS';
+    if (visivel) gab.scrollIntoView({ behavior: 'smooth' });
+  }
+  </script>
+</body>
+</html>
