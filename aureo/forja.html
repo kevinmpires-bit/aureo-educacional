@@ -181,6 +181,13 @@
     .forja-cta-wrap h3 { font-family: var(--font-display); font-size: var(--text-h2); color: var(--gold); margin-bottom: 12px; }
     .forja-cta-wrap p { font-weight: 300; font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; }
 
+    /* ── ARENA HEADER ── */
+    .forja-arena-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .forja-arena-contador { font-family: var(--font-ui); font-weight: 500; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); }
+    .forja-fechar-btn { font-family: var(--font-ui); font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); background: transparent; border: 1px solid var(--border-default); padding: 8px 16px; cursor: pointer; border-radius: 0; transition: all 200ms ease; }
+    .forja-fechar-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .forja-nav-wrap { display: flex; align-items: center; margin-top: 24px; gap: 12px; }
+
     @media (max-width: 767px) {
       .forja-card { padding: 24px 20px; }
       .forja-alt { padding: 14px 16px; }
@@ -243,14 +250,28 @@
       </div>
       <div class="forja-filtros__body">
         <div class="forja-filtros__row">
+          <label class="forja-label" for="materia-busca">Buscar matéria</label>
+          <input class="forja-select" type="text" id="materia-busca" placeholder="Digite para filtrar..." autocomplete="off" oninput="filtrarOpcoes(this.value)">
+        </div>
+        <div class="forja-filtros__row">
           <label class="forja-label" for="materia-select">Matéria</label>
           <select class="forja-select" id="materia-select">
-            <option value="todas">Todas as matérias</option>
-            <option value="Ética Profissional">Ética Profissional</option>
-            <option value="Direito Constitucional">Direito Constitucional</option>
-            <option value="Direito Civil">Direito Civil</option>
-            <option value="Direito Penal">Direito Penal</option>
-            <option value="Direito do Trabalho">Direito do Trabalho</option>
+            <option value="todas">Todas as matérias (80 questões)</option>
+            <option value="Ética Profissional">Ética Profissional (8)</option>
+            <option value="Introdução ao Estudo do Direito">Introdução ao Estudo do Direito (2)</option>
+            <option value="Direito Constitucional">Direito Constitucional (9)</option>
+            <option value="Direitos Humanos">Direitos Humanos (2)</option>
+            <option value="Direito Civil">Direito Civil (8)</option>
+            <option value="Direito Administrativo">Direito Administrativo (8)</option>
+            <option value="Direito Tributário">Direito Tributário (5)</option>
+            <option value="Direito Penal">Direito Penal (7)</option>
+            <option value="Direito do Trabalho">Direito do Trabalho (8)</option>
+            <option value="Direito do Consumidor">Direito do Consumidor (2)</option>
+            <option value="Direito Empresarial">Direito Empresarial (4)</option>
+            <option value="Direito Processual Civil">Direito Processual Civil (6)</option>
+            <option value="Direito Processual Penal">Direito Processual Penal (6)</option>
+            <option value="Direito Previdenciário">Direito Previdenciário (2)</option>
+            <option value="Direito Processual do Trabalho">Direito Processual do Trabalho (3)</option>
           </select>
         </div>
         <div class="forja-filtros__row">
@@ -258,12 +279,13 @@
           <div class="forja-qtd-group" role="group" aria-label="Quantidade de questões">
             <button class="forja-qtd-btn" data-qtd="5"  onclick="selecionarQtd(this)">5</button>
             <button class="forja-qtd-btn active" data-qtd="10" onclick="selecionarQtd(this)">10</button>
-            <button class="forja-qtd-btn" data-qtd="15" onclick="selecionarQtd(this)">15</button>
             <button class="forja-qtd-btn" data-qtd="20" onclick="selecionarQtd(this)">20</button>
+            <button class="forja-qtd-btn" data-qtd="40" onclick="selecionarQtd(this)">40</button>
+            <button class="forja-qtd-btn" data-qtd="80" onclick="selecionarQtd(this)">80</button>
           </div>
         </div>
         <div class="forja-filtros__action">
-          <button class="btn-primary" onclick="iniciarSimulado()">INICIAR SIMULADO</button>
+          <button class="btn-primary" onclick="iniciarSimulado()">FORJAR QUESTÕES</button>
         </div>
       </div>
     </div>
@@ -272,16 +294,21 @@
   <!-- ARENA -->
   <section class="forja-arena" id="forja-arena">
     <div class="container">
+      <div class="forja-arena-header">
+        <button class="forja-fechar-btn" onclick="novoSimulado()" aria-label="Encerrar simulado">✕ Encerrar</button>
+        <span id="arena-contador" class="forja-arena-contador">QUESTÃO 1 DE 10</span>
+      </div>
       <div class="forja-progress-wrap">
-        <div class="forja-progress-label">
-          <span id="arena-contador">QUESTÃO 1 DE 10</span>
-          <span id="arena-materia-label"></span>
-        </div>
         <div class="forja-progress-bar">
           <div class="forja-progress-fill" id="progress-fill" style="width:0%"></div>
         </div>
       </div>
       <div class="forja-card" id="forja-card"></div>
+      <div class="forja-nav-wrap" id="forja-nav-wrap">
+        <button class="btn-secondary" id="btn-anterior" onclick="questaoAnterior()" style="display:none">‹ Anterior</button>
+        <div style="flex:1"></div>
+        <button class="btn-primary"   id="btn-proxima"  onclick="proximaOuFinalizar()" style="display:none">Próxima ›</button>
+      </div>
     </div>
   </section>
 
@@ -294,6 +321,8 @@
       <p class="forja-resultado__pct" id="pct-display"></p>
       <p class="forja-resultado__msg" id="msg-display"></p>
       <div class="forja-resultado__sep"></div>
+      <p class="forja-filtros__eyebrow" style="margin-bottom:16px">DESEMPENHO POR MATÉRIA</p>
+      <canvas id="forja-grafico" style="width:100%;max-width:700px;display:block;margin-bottom:40px" height="320"></canvas>
       <div class="forja-resumo" id="forja-resumo"></div>
       <div class="forja-resultado__btns">
         <button class="btn-primary"   onclick="novoSimulado()">NOVO SIMULADO</button>
@@ -610,15 +639,809 @@
       },
       correta: "B",
       fundamentacao: "Na dispensa sem justa causa, o empregado tem direito ao: saldo de salário (dias trabalhados no mês), aviso prévio proporcional ao tempo de serviço (art. 7º, XXI, CF/88 e Lei 12.506/2011), férias vencidas e proporcionais + 1/3 constitucional (art. 7º, XVII, CF/88), 13º salário proporcional (art. 7º, VIII, CF/88) e FGTS com multa de 40% (art. 7º, I, CF/88 e art. 18, §1º, Lei 8.036/90). O aviso prévio varia de 30 a 90 dias conforme o tempo de serviço."
+    },
+    /* ── ÉTICA PROFISSIONAL (6, 7, 8) ── */
+    {
+      id: 21, materia: "Ética Profissional",
+      enunciado: "De acordo com o Estatuto da OAB, o advogado que recebe valores de cliente para repasse a terceiros e os retém indevidamente pratica infração disciplinar denominada:",
+      alternativas: {
+        A: "Captação de clientela.",
+        B: "Apropriação indébita de valores, sujeita apenas à responsabilidade penal.",
+        C: "Locupletamento à custa do cliente, infração grave punível com exclusão.",
+        D: "Violação do sigilo profissional.",
+        E: "Abandono de causa."
+      },
+      correta: "C",
+      fundamentacao: "O art. 34, XXI, do Estatuto da OAB (Lei 8.906/94) tipifica como infração disciplinar grave o locupletamento à custa do cliente. O art. 38 prevê que tal conduta, por sua gravidade, é punida com exclusão dos quadros da OAB. Trata-se de violação ao dever de lealdade e honestidade, que são pilares da deontologia advocatícia."
+    },
+    {
+      id: 22, materia: "Ética Profissional",
+      enunciado: "Advogado recém-inscrito na OAB deseja anunciar seus serviços nas redes sociais. Segundo o Código de Ética e Disciplina, é PERMITIDO:",
+      alternativas: {
+        A: "Publicar posts com depoimentos de clientes satisfeitos elogiando seus serviços.",
+        B: "Anunciar tabela de honorários detalhada para atrair clientes.",
+        C: "Manter perfil profissional informativo com área de atuação e formas de contato.",
+        D: "Enviar mensagens diretas não solicitadas a potenciais clientes oferecendo serviços.",
+        E: "Publicar casos concretos com nomes das partes para demonstrar experiência."
+      },
+      correta: "C",
+      fundamentacao: "O art. 39 do Código de Ética e Disciplina da OAB permite a publicidade informativa e discreta do advogado, incluindo redes sociais e sites, desde que não haja caráter mercantilista. São vedados: depoimentos de clientes (art. 40, I), divulgação de honorários (art. 40, II), captação ativa de clientela (art. 34, IV do Estatuto) e violação do sigilo ao mencionar casos concretos."
+    },
+    {
+      id: 23, materia: "Ética Profissional",
+      enunciado: "Sobre os honorários advocatícios, conforme o Estatuto da OAB e o Código de Ética, assinale a alternativa CORRETA:",
+      alternativas: {
+        A: "O contrato de honorários pode prever participação em percentual superior a 30% do valor da causa em qualquer hipótese.",
+        B: "Os honorários pertencem ao advogado e não podem ser objeto de renúncia ou transação sem seu consentimento.",
+        C: "O advogado é obrigado a prestar serviços pro bono quando determinado pela OAB, sem qualquer remuneração.",
+        D: "Os honorários de sucumbência fixados judicialmente pertencem à parte vencedora, não ao advogado.",
+        E: "O advogado pode cobrar honorários apenas após o encerramento do processo."
+      },
+      correta: "B",
+      fundamentacao: "O art. 24 do Estatuto da OAB (Lei 8.906/94) estabelece que os honorários advocatícios pertencem ao advogado, tendo natureza alimentar. O §3º do mesmo artigo veda ao cliente, sem consentimento do advogado, transacionar sobre eles. O §1º do art. 36 do Código de Ética prevê que os honorários de sucumbência pertencem ao advogado, podendo ser objeto de partilha com o cliente apenas por ajuste escrito."
+    },
+    /* ── INTRODUÇÃO AO ESTUDO DO DIREITO (2) ── */
+    {
+      id: 24, materia: "Introdução ao Estudo do Direito",
+      enunciado: "Segundo a teoria do ordenamento jurídico de Kelsen, a norma fundamental (Grundnorm):",
+      alternativas: {
+        A: "É a Constituição Federal, posta pelo legislador constituinte originário.",
+        B: "É uma norma pressuposta, não posta, que confere validade a todo o sistema jurídico positivo.",
+        C: "É a lei de introdução às normas do direito brasileiro (LINDB), por ser norma sobre normas.",
+        D: "É identificada com o direito natural, servindo de critério de legitimidade das normas positivas.",
+        E: "É a norma hierarquicamente superior dentro de cada sistema jurídico, variando conforme o ordenamento."
+      },
+      correta: "B",
+      fundamentacao: "Para Hans Kelsen (Teoria Pura do Direito), a norma fundamental (Grundnorm) não é posta por um ato de vontade humano, mas pressuposta logicamente como condição de validade de todo o ordenamento. Ela determina que se deve obedecer à Constituição histórica. Não se confunde com a Constituição positiva (esta é posta) nem com o direito natural. É o fundamento último de validade do sistema sem ser ela própria uma norma positiva."
+    },
+    {
+      id: 25, materia: "Introdução ao Estudo do Direito",
+      enunciado: "Sobre as fontes do direito no ordenamento jurídico brasileiro, assinale a alternativa correta:",
+      alternativas: {
+        A: "A analogia, os costumes e os princípios gerais de direito são fontes formais primárias do direito brasileiro.",
+        B: "Na ausência de lei, o juiz deve abster-se de julgar (non liquet), aguardando atuação do legislador.",
+        C: "Quando a lei for omissa, o juiz decidirá o caso de acordo com a analogia, os costumes e os princípios gerais de direito.",
+        D: "Os costumes prevalecem sobre a lei quando mais adequados à realidade social.",
+        E: "A doutrina é fonte formal primária do direito, vinculando os juízes em suas decisões."
+      },
+      correta: "C",
+      fundamentacao: "O art. 4º da Lei de Introdução às Normas do Direito Brasileiro (LINDB — Decreto-Lei 4.657/42) determina que, quando a lei for omissa, o juiz decidirá o caso de acordo com a analogia, os costumes e os princípios gerais de direito. Consagra-se a proibição do non liquet: o juiz não pode se recusar a julgar. A analogia e os costumes são fontes formais secundárias; a doutrina e a jurisprudência são fontes materiais."
+    },
+    /* ── DIREITO CONSTITUCIONAL (6, 7, 8, 9) ── */
+    {
+      id: 26, materia: "Direito Constitucional",
+      enunciado: "Sobre o processo legislativo constitucional, assinale a assertiva correta:",
+      alternativas: {
+        A: "As medidas provisórias podem versar sobre qualquer matéria, inclusive direito penal e eleitoral.",
+        B: "A lei delegada pode ser elaborada pelo Presidente da República mediante delegação do Congresso Nacional, sendo vedada sua edição em matéria de direitos individuais.",
+        C: "As emendas constitucionais podem ser propostas por 1/3 dos membros da Câmara ou do Senado, pelo Presidente da República ou por mais da metade das Assembleias Legislativas.",
+        D: "Os projetos de lei de iniciativa popular devem ser subscritos por no mínimo 0,5% do eleitorado nacional.",
+        E: "Leis complementares e leis ordinárias possuem o mesmo quórum de aprovação, diferenciando-se apenas pela matéria que regulam."
+      },
+      correta: "C",
+      fundamentacao: "O art. 60, I, II e III, da CF/88 estabelece que as emendas constitucionais podem ser propostas por: 1/3 dos membros da Câmara ou do Senado; pelo Presidente da República; ou por mais da metade das Assembleias Legislativas das unidades da Federação, manifestando-se cada uma delas pela maioria relativa de seus membros. A aprovação exige 3/5 dos votos em dois turnos em cada Casa (art. 60, §2º)."
+    },
+    {
+      id: 27, materia: "Direito Constitucional",
+      enunciado: "Sobre a intervenção federal nos Estados-membros, conforme a CF/88, assinale a alternativa correta:",
+      alternativas: {
+        A: "A intervenção federal é medida ordinária de gestão federativa, dispensando decreto presidencial.",
+        B: "O STF pode decretar intervenção federal de ofício quando verificar afronta à ordem constitucional.",
+        C: "A intervenção federal para garantir a execução de ordem judicial (inclusive do STF) depende de requisição do Tribunal.",
+        D: "A intervenção federal é cabível para manter a integridade territorial dos Municípios.",
+        E: "O Congresso Nacional pode decretar intervenção federal independentemente da atuação do Presidente da República."
+      },
+      correta: "C",
+      fundamentacao: "O art. 36, II, da CF/88 prevê que a intervenção federal dependerá de requisição do STF, no caso de desobediência a ordem ou decisão judicial. O art. 84, X, atribui ao Presidente da República competência privativa para decretar intervenção federal. A intervenção é medida excepcional (art. 34), sendo vedada salvo nas hipóteses taxativamente listadas. A integridade territorial protegida é a dos Estados (art. 34, I), não dos Municípios."
+    },
+    {
+      id: 28, materia: "Direito Constitucional",
+      enunciado: "Quanto às funções essenciais à Justiça previstas na CF/88, assinale a alternativa correta:",
+      alternativas: {
+        A: "A Defensoria Pública integra o Poder Judiciário, sendo seus membros considerados auxiliares da Justiça.",
+        B: "O Ministério Público pode propor ação penal privada quando o ofendido for hipossuficiente.",
+        C: "A Advocacia Pública compreende a Advocacia-Geral da União, as Procuradorias dos Estados e do DF, representando judicialmente os entes federativos.",
+        D: "A OAB integra a Administração Pública indireta, sujeitando-se ao controle do Tribunal de Contas da União.",
+        E: "O Ministério Público pode avocar investigações policiais e presidir inquéritos policiais diretamente."
+      },
+      correta: "C",
+      fundamentacao: "Os arts. 131 a 135 da CF/88 tratam das funções essenciais à Justiça (MP, Advocacia Pública, Defensoria Pública e advocacia). A Advocacia Pública é representada pela AGU (art. 131) e pelas Procuradorias dos Estados e do DF (art. 132), que exercem a representação judicial e a consultoria jurídica dos entes. A Defensoria Pública (art. 134) é instituição autônoma, não integra o Judiciário. A OAB tem natureza jurídica sui generis (STF, ADI 3026)."
+    },
+    {
+      id: 29, materia: "Direito Constitucional",
+      enunciado: "Sobre o habeas corpus na Constituição Federal de 1988, assinale a alternativa INCORRETA:",
+      alternativas: {
+        A: "O habeas corpus pode ser impetrado por qualquer pessoa, em seu favor ou de outrem.",
+        B: "Cabe habeas corpus quando houver ameaça à liberdade de locomoção, não apenas em casos de prisão consumada.",
+        C: "O habeas corpus é cabível contra ato de particular que constrange ilegalmente a liberdade de locomoção.",
+        D: "Não cabe habeas corpus contra punição disciplinar militar, salvo quando houver ilegalidade.",
+        E: "O habeas corpus pode ser impetrado em face de ato judicial mesmo sem prévia interposição de recurso."
+      },
+      correta: "D",
+      fundamentacao: "A questão pede a alternativa INCORRETA. O art. 142, §2º, da CF/88 veda o habeas corpus em relação a punições disciplinares militares — sem a ressalva 'salvo quando houver ilegalidade'. A Súmula 694 do STF confirma que não cabe HC para revisar critério de mérito das punições disciplinares, mas o STF admite HC quando houver ilegalidade (excesso de prazo, incompetência). A alternativa D está parcialmente incorreta ao apresentar a ressalva como constante no texto constitucional."
+    },
+    /* ── DIREITOS HUMANOS (2) ── */
+    {
+      id: 30, materia: "Direitos Humanos",
+      enunciado: "Sobre o Sistema Interamericano de Direitos Humanos, assinale a alternativa correta:",
+      alternativas: {
+        A: "A Corte Interamericana de Direitos Humanos pode ser acionada diretamente por qualquer indivíduo vítima de violação.",
+        B: "A Comissão Interamericana de Direitos Humanos julga casos e emite sentenças vinculantes contra os Estados.",
+        C: "O Brasil reconheceu a jurisdição contenciosa da Corte IDH em 1998, sujeitando-se às suas sentenças.",
+        D: "A Convenção Americana sobre Direitos Humanos (Pacto de San José) foi incorporada ao direito brasileiro com status de emenda constitucional.",
+        E: "A Corte IDH pode apreciar casos sem que tenham sido previamente submetidos à Comissão Interamericana."
+      },
+      correta: "C",
+      fundamentacao: "O Brasil reconheceu a jurisdição contenciosa da Corte Interamericana de Direitos Humanos por meio do Decreto Legislativo nº 89/1998. Apenas os Estados e a Comissão podem submeter casos à Corte IDH; indivíduos peticionam à Comissão. A Convenção Americana foi incorporada com status supralegal (STF, RE 466.343), não de emenda constitucional, pois não seguiu o rito do art. 5º, §3º, da CF/88. A Comissão emite relatórios e recomendações, não sentenças vinculantes."
+    },
+    {
+      id: 31, materia: "Direitos Humanos",
+      enunciado: "Sobre os tratados internacionais de direitos humanos e sua hierarquia no ordenamento jurídico brasileiro, conforme entendimento do STF:",
+      alternativas: {
+        A: "Todos os tratados de direitos humanos têm status de emenda constitucional, independentemente do processo de aprovação.",
+        B: "Os tratados de direitos humanos aprovados pelo rito especial do art. 5º, §3º, da CF/88 têm equivalência às emendas constitucionais; os demais têm status supralegal.",
+        C: "Os tratados de direitos humanos têm status de lei ordinária federal, podendo ser revogados por lei posterior.",
+        D: "Os tratados de direitos humanos revogam automaticamente as normas infraconstitucionais incompatíveis, tendo eficácia plena.",
+        E: "O STF reconhece status constitucional a todos os tratados de direitos humanos, mesmo sem aprovação pelo rito especial."
+      },
+      correta: "B",
+      fundamentacao: "O STF, nos REs 466.343 e 349.703 (2008), adotou a tese da supralegalidade: os tratados de direitos humanos não aprovados pelo rito do art. 5º, §3º (dois turnos, 3/5 dos votos) têm status supralegal — abaixo da Constituição, mas acima da legislação ordinária. Já os aprovados pelo rito especial (ex.: Convenção sobre Direitos das Pessoas com Deficiência — Decreto 6.949/09) equivalem às emendas constitucionais."
+    },
+    /* ── DIREITO CIVIL (5, 6, 7, 8) ── */
+    {
+      id: 32, materia: "Direito Civil",
+      enunciado: "Sobre os contratos em geral no Código Civil de 2002, assinale a alternativa correta:",
+      alternativas: {
+        A: "O contrato de adesão é aquele em que uma das partes estabelece previamente as cláusulas, sendo nulo de pleno direito.",
+        B: "A função social do contrato é princípio que impede a resolução por onerosidade excessiva.",
+        C: "O contrato obriga as partes ao que nele foi expressamente pactuado, sendo vedada a integração com usos e costumes.",
+        D: "Os contratantes são obrigados a guardar, na conclusão e na execução do contrato, os princípios de probidade e boa-fé.",
+        E: "A relatividade dos efeitos contratuais impede que terceiros sejam atingidos por qualquer cláusula do contrato."
+      },
+      correta: "D",
+      fundamentacao: "O art. 422 do Código Civil consagra o princípio da boa-fé objetiva, determinando que os contratantes são obrigados a guardar, assim na conclusão do contrato como em sua execução, os princípios de probidade e boa-fé. O art. 421 prevê a função social do contrato. O art. 423 traz proteção ao aderente nos contratos de adesão (não os torna nulos). O art. 113 permite integração com usos e costumes."
+    },
+    {
+      id: 33, materia: "Direito Civil",
+      enunciado: "Sobre a usucapião no Código Civil, assinale a alternativa correta:",
+      alternativas: {
+        A: "A usucapião ordinária exige posse de 15 anos, sem necessidade de justo título e boa-fé.",
+        B: "A usucapião extraordinária exige posse mansa e pacífica por 10 anos, com justo título e boa-fé.",
+        C: "A usucapião especial urbana exige 5 anos de posse, área não superior a 250m², para moradia, sem ser proprietário de outro imóvel.",
+        D: "A usucapião familiar (pro labore) pode ser exercida entre cônjuges conviventes.",
+        E: "A usucapião especial rural exige posse por 5 anos de área não superior a 50 hectares, com trabalho próprio ou da família."
+      },
+      correta: "C",
+      fundamentacao: "O art. 183 da CF/88 e o art. 1.240 do CC estabelecem a usucapião especial urbana: aquele que possuir área urbana de até 250m² por 5 anos, ininterruptamente e sem oposição, utilizando-a para sua moradia ou de sua família, adquire o domínio, desde que não seja proprietário de outro imóvel. A usucapião extraordinária (art. 1.238 CC) exige 15 anos (ou 10 com moradia/obras); a ordinária (art. 1.242) exige 10 anos com justo título e boa-fé."
+    },
+    {
+      id: 34, materia: "Direito Civil",
+      enunciado: "Sobre a teoria da desconsideração da personalidade jurídica no Código Civil, assinale a alternativa correta:",
+      alternativas: {
+        A: "A desconsideração da personalidade jurídica é automática quando a sociedade não tem bens suficientes para pagar seus credores.",
+        B: "O juiz pode desconsiderar a personalidade jurídica quando houver abuso da personalidade jurídica caracterizado por desvio de finalidade ou confusão patrimonial.",
+        C: "A desconsideração inversa da personalidade jurídica não é admitida no direito brasileiro.",
+        D: "A desconsideração da personalidade jurídica implica extinção definitiva da pessoa jurídica.",
+        E: "Apenas credores trabalhistas podem requerer a desconsideração da personalidade jurídica."
+      },
+      correta: "B",
+      fundamentacao: "O art. 50 do Código Civil prevê que, em caso de abuso da personalidade jurídica, caracterizado pelo desvio de finalidade ou pela confusão patrimonial, pode o juiz, a requerimento da parte ou do Ministério Público, desconsiderar a personalidade jurídica. A desconsideração não extingue a pessoa jurídica — é episódica. O STJ admite a desconsideração inversa (responsabilizar a PJ por dívidas do sócio). O CPC/2015 regulamentou o incidente (arts. 133 a 137)."
+    },
+    {
+      id: 35, materia: "Direito Civil",
+      enunciado: "Sobre os direitos reais de garantia (penhor, hipoteca e anticrese), assinale a alternativa correta:",
+      alternativas: {
+        A: "O penhor recai sobre bens imóveis, enquanto a hipoteca recai sobre bens móveis.",
+        B: "A hipoteca pode ser constituída sobre aeronaves e navios, bens que, embora móveis, admitem hipoteca por expressa disposição legal.",
+        C: "A anticrese confere ao credor o direito de receber os frutos do imóvel, tornando-se proprietário do bem após o vencimento da dívida.",
+        D: "O pacto comissório — cláusula que permite ao credor ficar com o bem dado em garantia — é válido e expressamente admitido pelo CC.",
+        E: "O penhor é sempre constituído por contrato, sendo vedada sua constituição por lei."
+      },
+      correta: "B",
+      fundamentacao: "O art. 1.473, VI e VII, do Código Civil admite a hipoteca sobre aeronaves e navios, bens que, embora móveis por natureza, sujeitam-se a registro público que permite a publicidade necessária à garantia real. A anticrese (art. 1.506) confere ao credor o direito de reter o imóvel e perceber seus frutos, mas não o torna proprietário. O pacto comissório é proibido (art. 1.428). O penhor pode decorrer de lei (penhor legal — art. 1.467)."
+    },
+    /* ── DIREITO ADMINISTRATIVO (8) ── */
+    {
+      id: 36, materia: "Direito Administrativo",
+      enunciado: "Sobre os princípios da Administração Pública expressos na CF/88, assinale a alternativa correta:",
+      alternativas: {
+        A: "O princípio da legalidade para a Administração Pública significa que ela pode fazer tudo que a lei não proíbe.",
+        B: "O princípio da impessoalidade impede que o agente público seja responsabilizado pessoalmente por atos praticados no exercício de suas funções.",
+        C: "O princípio da moralidade é mero desdobramento do princípio da legalidade, não tendo conteúdo jurídico autônomo.",
+        D: "O princípio da eficiência, acrescentado pela EC 19/1998, obriga a Administração a atingir os melhores resultados com os recursos disponíveis.",
+        E: "O princípio da publicidade exige que todos os atos administrativos sejam publicados no Diário Oficial para produzirem efeitos."
+      },
+      correta: "D",
+      fundamentacao: "O princípio da eficiência foi inserido no art. 37, caput, da CF/88 pela EC 19/1998 (Reforma Administrativa). Impõe à Administração a busca pelo melhor resultado com o menor custo, englobando a eficiência dos agentes e da organização. O princípio da legalidade para a Administração é positivo — ela só pode fazer o que a lei autoriza (diferente dos particulares). A publicidade é requisito de eficácia, mas atos internos não exigem publicação no DOU."
+    },
+    {
+      id: 37, materia: "Direito Administrativo",
+      enunciado: "Sobre os atos administrativos, assinale a alternativa correta:",
+      alternativas: {
+        A: "A revogação de ato administrativo pode ser realizada pelo Poder Judiciário por razões de conveniência e oportunidade.",
+        B: "A anulação do ato administrativo ilegal pode ser feita pela própria Administração ou pelo Judiciário, produzindo efeitos ex tunc.",
+        C: "Os atos administrativos vinculados admitem revogação pela Administração a qualquer tempo.",
+        D: "A presunção de legitimidade dos atos administrativos é absoluta, não admitindo prova em contrário.",
+        E: "A imperatividade é atributo presente em todos os atos administrativos, inclusive os negociais."
+      },
+      correta: "B",
+      fundamentacao: "A Súmula 473 do STF e o art. 53 da Lei 9.784/99 consagram o poder-dever da Administração de anular seus próprios atos ilegais. A anulação produz efeitos retroativos (ex tunc), pois o ato ilegal nunca deveria ter produzido efeitos. A revogação (por inconveniência/inoportunidade) é prerrogativa exclusiva da Administração — o Judiciário apenas anula. Atos vinculados não comportam revogação. A presunção de legitimidade é relativa (iuris tantum)."
+    },
+    {
+      id: 38, materia: "Direito Administrativo",
+      enunciado: "Sobre licitações públicas e a Lei 14.133/2021 (Nova Lei de Licitações), assinale a alternativa correta:",
+      alternativas: {
+        A: "O pregão é modalidade de licitação destinada exclusivamente à contratação de obras e serviços de engenharia.",
+        B: "A dispensa de licitação e a inexigibilidade de licitação são situações idênticas, ambas cabíveis quando a licitação é inviável.",
+        C: "A modalidade concorrência é obrigatória para contratações de grande vulto, obras e alienação de bens imóveis da Administração.",
+        D: "O pregão eletrônico é obrigatório para aquisição de bens e serviços comuns, independentemente do valor.",
+        E: "A licitação dispensa-se sempre que o valor da contratação for inferior a R$ 50.000,00, para qualquer objeto."
+      },
+      correta: "D",
+      fundamentacao: "A Lei 14.133/2021 (art. 176) e o Decreto 10.024/2019 tornam obrigatório o pregão eletrônico para aquisição de bens e serviços comuns, independentemente do valor, salvo comprovada inviabilidade. A dispensa ocorre nas hipóteses taxativas do art. 75 (quando a licitação é possível mas dispensável); a inexigibilidade (art. 74) ocorre quando a competição é inviável. A concorrência e o diálogo competitivo são modalidades para contratos de maior complexidade."
+    },
+    {
+      id: 39, materia: "Direito Administrativo",
+      enunciado: "Sobre a responsabilidade civil do Estado, conforme a CF/88 e a jurisprudência do STF, assinale a alternativa correta:",
+      alternativas: {
+        A: "A responsabilidade civil do Estado é sempre subjetiva, exigindo prova de dolo ou culpa do agente.",
+        B: "O Estado responde objetivamente pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o agente culposo ou doloso.",
+        C: "A responsabilidade objetiva do Estado aplica-se apenas aos atos comissivos, não alcançando as omissões.",
+        D: "O Estado não responde por atos jurisdicionais, ainda que o magistrado atue com dolo.",
+        E: "A responsabilidade civil do Estado por atos legislativos é objetiva e automática, bastando a promulgação de lei inconstitucional."
+      },
+      correta: "B",
+      fundamentacao: "O art. 37, §6º, da CF/88 adota a teoria da responsabilidade objetiva do Estado (risco administrativo): as pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos respondem pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso contra o responsável nos casos de dolo ou culpa. A omissão estatal, em regra, gera responsabilidade subjetiva (STF, ADPF 347)."
+    },
+    {
+      id: 40, materia: "Direito Administrativo",
+      enunciado: "Sobre os servidores públicos e o regime jurídico, assinale a alternativa correta:",
+      alternativas: {
+        A: "Todos os servidores públicos da Administração direta são necessariamente estatutários, sendo vedada a contratação celetista.",
+        B: "A estabilidade do servidor estatutário é adquirida após 2 anos de efetivo exercício no cargo de provimento efetivo.",
+        C: "O servidor estável só pode perder o cargo mediante sentença judicial transitada em julgado, processo administrativo disciplinar ou insuficiência de desempenho.",
+        D: "Os cargos em comissão destinam-se exclusivamente a servidores de carreira, vedada a nomeação de pessoas sem vínculo com a Administração.",
+        E: "A acumulação de dois cargos efetivos é vedada em qualquer hipótese pela Constituição Federal."
+      },
+      correta: "C",
+      fundamentacao: "O art. 41, §1º, da CF/88 estabelece que o servidor público estável só perderá o cargo em virtude de: I — sentença judicial transitada em julgado; II — processo administrativo disciplinar; III — procedimento de avaliação periódica de desempenho. A estabilidade é adquirida após 3 anos de efetivo exercício (EC 19/1998). Cargos em comissão podem ser ocupados por qualquer pessoa (art. 37, V, CF). A acumulação é possível em hipóteses do art. 37, XVI."
+    },
+    {
+      id: 41, materia: "Direito Administrativo",
+      enunciado: "Sobre o poder de polícia administrativo, assinale a alternativa correta:",
+      alternativas: {
+        A: "O poder de polícia é privativo da União, não podendo ser exercido por Estados, DF ou Municípios.",
+        B: "O poder de polícia pode ser totalmente delegado a entidades privadas mediante contrato de concessão.",
+        C: "O poder de polícia é atividade da Administração que limita o exercício de direitos e liberdades em prol do interesse público, sendo dotado de autoexecutoriedade.",
+        D: "A taxa de polícia somente pode ser cobrada após efetivo exercício do poder de polícia no caso concreto.",
+        E: "O poder de polícia não pode restringir o direito de propriedade, pois este é absoluto."
+      },
+      correta: "C",
+      fundamentacao: "O poder de polícia (art. 78 do CTN) é a atividade da Administração que, limitando ou disciplinando direito, interesse ou liberdade, regula a prática de ato ou abstenção de fato em razão de interesse público. Seus atributos são: discricionariedade, autoexecutoriedade e coercibilidade. O STF (RE 633.782) admitiu delegação de atos de consentimento e fiscalização a entidades da Administração indireta de direito público. O poder de polícia é concorrente entre os entes federativos."
+    },
+    {
+      id: 42, materia: "Direito Administrativo",
+      enunciado: "Sobre os contratos administrativos, assinale a alternativa correta:",
+      alternativas: {
+        A: "Os contratos administrativos são regidos exclusivamente pelas normas de direito privado, aplicando-se subsidiariamente o direito público.",
+        B: "A cláusula exorbitante que permite à Administração modificar unilateralmente o contrato é ilimitada, podendo alterar qualquer aspecto do ajuste.",
+        C: "A Administração pode alterar unilateralmente as cláusulas regulamentares do contrato, mantendo sempre o equilíbrio econômico-financeiro.",
+        D: "O particular contratado pode invocar a exceptio non adimpleti contractus imediatamente quando a Administração atrasar o pagamento.",
+        E: "Os contratos administrativos dispensam a forma escrita quando o valor for inferior ao limite de dispensa de licitação."
+      },
+      correta: "C",
+      fundamentacao: "A Lei 14.133/2021 (art. 104) prevê que a Administração pode alterar unilateralmente o contrato para modificar as cláusulas regulamentares (especificações técnicas, prazo de execução), mas deve preservar o equilíbrio econômico-financeiro original (art. 92, V). A modificação das cláusulas econômicas depende de acordo. O STJ e a doutrina admitem a exceptio non adimpleti contractus de forma mitigada (após 90 dias de inadimplemento, conforme art. 137, §2º, IV, da Lei 14.133/2021)."
+    },
+    {
+      id: 43, materia: "Direito Administrativo",
+      enunciado: "Sobre o controle da Administração Pública, assinale a alternativa correta:",
+      alternativas: {
+        A: "O controle interno é exercido exclusivamente pelo Poder Legislativo com o auxílio do Tribunal de Contas.",
+        B: "O Tribunal de Contas da União tem natureza jurisdicional, sendo suas decisões definitivas e insuscetíveis de revisão pelo Judiciário.",
+        C: "O controle externo, exercido pelo Legislativo com o auxílio do TCU, abrange a fiscalização contábil, financeira, operacional e patrimonial da Administração.",
+        D: "O mandado de segurança é o único instrumento judicial de controle da Administração Pública.",
+        E: "O controle de mérito do ato administrativo pode ser exercido pelo Judiciário quando houver violação de direitos."
+      },
+      correta: "C",
+      fundamentacao: "O art. 70 da CF/88 estabelece que a fiscalização contábil, financeira, orçamentária, operacional e patrimonial da União é exercida pelo Congresso Nacional, mediante controle externo, e pelo sistema de controle interno de cada Poder. O art. 71 atribui ao TCU o auxílio no controle externo. O TCU tem natureza administrativa (não jurisdicional), e suas decisões são revisíveis pelo Judiciário. O Judiciário controla a legalidade, não o mérito do ato administrativo."
+    },
+    /* ── DIREITO TRIBUTÁRIO (5) ── */
+    {
+      id: 44, materia: "Direito Tributário",
+      enunciado: "Sobre as limitações constitucionais ao poder de tributar, assinale a alternativa correta:",
+      alternativas: {
+        A: "O princípio da anterioridade veda a cobrança de tributos no mesmo exercício financeiro em que publicada a lei que os instituiu, aplicando-se a todos os tributos sem exceção.",
+        B: "O princípio da legalidade tributária exige que todos os elementos do tributo (fato gerador, base de cálculo, alíquota, sujeito passivo) estejam previstos em lei.",
+        C: "O princípio da isonomia tributária impede qualquer distinção entre contribuintes, ainda que em situações economicamente distintas.",
+        D: "O princípio da irretroatividade tributária veda a cobrança de tributos em relação a fatos geradores ocorridos antes do início da vigência da lei que os houver instituído, salvo se mais benéfica ao contribuinte.",
+        E: "O princípio da capacidade contributiva aplica-se apenas aos impostos pessoais, sendo inaplicável aos impostos reais."
+      },
+      correta: "B",
+      fundamentacao: "O art. 150, I, da CF/88 consagra o princípio da estrita legalidade tributária: é vedado exigir ou aumentar tributo sem lei que o estabeleça. O art. 97 do CTN especifica os elementos que devem estar em lei: fato gerador, base de cálculo, alíquota, sujeito passivo, penalidades e hipóteses de exclusão, suspensão e extinção do crédito. A anterioridade tem exceções (IPI, IOF, II, IE, IEG — art. 150, §1º, CF). A irretroatividade benéfica é princípio do direito penal, não tributário."
+    },
+    {
+      id: 45, materia: "Direito Tributário",
+      enunciado: "Sobre o crédito tributário e suas formas de extinção, assinale a alternativa correta:",
+      alternativas: {
+        A: "O pagamento é a única forma de extinção do crédito tributário prevista no CTN.",
+        B: "A prescrição tributária extingue o crédito tributário e pode ser declarada de ofício pelo juiz.",
+        C: "A compensação tributária pode ser realizada pelo contribuinte unilateralmente, sem necessidade de autorização legal.",
+        D: "A decadência tributária refere-se ao prazo para o Fisco cobrar judicialmente o crédito já constituído.",
+        E: "A remissão é causa de exclusão do crédito tributário, impedindo seu lançamento."
+      },
+      correta: "B",
+      fundamentacao: "O art. 156 do CTN elenca as causas de extinção do crédito tributário, incluindo pagamento, compensação, transação, remissão, prescrição e decadência, entre outras. O art. 156, V, prevê expressamente a prescrição como causa extintiva. O STJ (Súmula 409) e o art. 219, §5º, do CPC permitem o reconhecimento de ofício da prescrição. A decadência (art. 173 CTN) extingue o direito de lançar; a prescrição (art. 174 CTN) extingue a ação de cobrança do crédito já lançado."
+    },
+    {
+      id: 46, materia: "Direito Tributário",
+      enunciado: "Sobre o ICMS, imposto de competência estadual, assinale a alternativa correta:",
+      alternativas: {
+        A: "O ICMS incide sobre operações relativas à circulação de mercadorias, mas não sobre serviços de transporte.",
+        B: "O ICMS é imposto cumulativo, incidindo em todas as etapas da cadeia produtiva sem direito a crédito.",
+        C: "O ICMS não incide sobre a importação de bens, pois é tributo voltado exclusivamente às operações internas.",
+        D: "O ICMS é imposto não cumulativo, compensando-se o que for devido em cada operação com o montante cobrado nas anteriores.",
+        E: "As alíquotas do ICMS são uniformes em todo o território nacional, fixadas por lei complementar federal."
+      },
+      correta: "D",
+      fundamentacao: "O art. 155, §2º, I, da CF/88 consagra o princípio da não cumulatividade do ICMS: compensar-se-á o que for devido em cada operação relativa à circulação de mercadorias ou prestação de serviços com o montante cobrado nas anteriores pelo mesmo ou outro Estado ou pelo DF. O ICMS incide também sobre prestações de serviços de transporte interestadual/intermunicipal e de comunicação (art. 155, II, CF). As alíquotas são fixadas por cada Estado, com alíquotas mínimas e máximas definidas pelo Senado."
+    },
+    {
+      id: 47, materia: "Direito Tributário",
+      enunciado: "Sobre o lançamento tributário e suas modalidades, assinale a alternativa correta:",
+      alternativas: {
+        A: "No lançamento por homologação, o sujeito passivo antecipa o pagamento sem prévio exame da autoridade, que o homologa expressa ou tacitamente.",
+        B: "O lançamento de ofício é aquele em que o contribuinte presta todas as informações necessárias à autoridade, que se limita a homologar.",
+        C: "O lançamento por declaração é a modalidade mais utilizada no sistema tributário brasileiro, aplicável ao IRPF e ao ICMS.",
+        D: "A revisão do lançamento pode ser feita a qualquer tempo, pois não há prazo decadencial para a Fazenda Pública.",
+        E: "O lançamento por homologação não admite impugnação pelo sujeito passivo após a homologação tácita."
+      },
+      correta: "A",
+      fundamentacao: "O art. 150 do CTN define o lançamento por homologação: ocorre quando a legislação atribui ao sujeito passivo o dever de antecipar o pagamento sem prévio exame da autoridade administrativa. A homologação pode ser expressa ou tácita (após 5 anos da ocorrência do fato gerador, salvo dolo, fraude ou simulação). É a modalidade mais utilizada no Brasil (IPI, ICMS, PIS, COFINS, IRPJ). O lançamento de ofício (art. 149) é feito pela autoridade sem participação do sujeito passivo."
+    },
+    {
+      id: 48, materia: "Direito Tributário",
+      enunciado: "Sobre o ISS (Imposto sobre Serviços de Qualquer Natureza), de competência municipal, assinale a alternativa correta:",
+      alternativas: {
+        A: "O ISS tem alíquota máxima de 2%, fixada pela LC 116/2003.",
+        B: "O ISS incide sobre serviços prestados por profissionais autônomos, sendo vedada a incidência sobre sociedades uniprofissionais.",
+        C: "O ISS não incide sobre serviços provenientes do exterior ou cuja prestação se tenha iniciado no exterior.",
+        D: "O ISS tem alíquota mínima de 2% (vedada redução por lei municipal) e máxima de 5%, conforme a LC 116/2003.",
+        E: "O ISS e o ICMS podem incidir simultaneamente sobre a mesma operação mista de prestação de serviços com fornecimento de mercadorias."
+      },
+      correta: "D",
+      fundamentacao: "A LC 116/2003 (art. 8º, II) fixa a alíquota máxima do ISS em 5%. A EC 37/2002 e a LC 116/2003 estabelecem a alíquota mínima de 2%, vedando aos municípios reduzi-la (para evitar guerra fiscal). O ISS incide também sobre serviços provenientes do exterior (art. 1º, §1º, LC 116/2003). Em operações mistas, o STJ distingue: se o serviço é preponderante, incide ISS; se a mercadoria é preponderante (salvo lista de serviços), incide ICMS."
+    },
+    /* ── DIREITO PENAL (4, 5, 6, 7) ── */
+    {
+      id: 49, materia: "Direito Penal",
+      enunciado: "Sobre o concurso de pessoas no Código Penal, assinale a alternativa correta:",
+      alternativas: {
+        A: "Para que haja concurso de pessoas, é necessário que todos os partícipes pratiquem o núcleo do tipo penal.",
+        B: "A participação de menor importância é causa de exclusão da pena, isentando o copartícipe de qualquer sanção.",
+        C: "Quem, de qualquer modo, concorre para o crime incide nas penas a este cominadas, na medida de sua culpabilidade.",
+        D: "As circunstâncias de caráter pessoal sempre se comunicam entre os coautores e partícipes.",
+        E: "No concurso de pessoas, é necessário vínculo subjetivo apenas entre o autor e o instigador, não entre os demais coautores."
+      },
+      correta: "C",
+      fundamentacao: "O art. 29 do Código Penal adota a teoria monista (unitária) no concurso de pessoas: quem, de qualquer modo, concorre para o crime incide nas penas a este cominadas, na medida de sua culpabilidade. A participação de menor importância é causa de diminuição de pena (art. 29, §1º), não de exclusão. O §2º prevê pena mais leve ao partícipe que queria participar de crime menos grave. As circunstâncias de caráter pessoal não se comunicam, salvo as elementares do crime (art. 30)."
+    },
+    {
+      id: 50, materia: "Direito Penal",
+      enunciado: "Sobre os crimes contra o patrimônio, assinale a alternativa correta:",
+      alternativas: {
+        A: "O furto qualificado pelo rompimento de obstáculo e o furto simples têm a mesma pena-base.",
+        B: "No crime de roubo, a violência ou grave ameaça são elementos acidentais, podendo sua ausência configurar furto.",
+        C: "O crime de extorsão mediante sequestro (art. 159 do CP) consuma-se com a privação da liberdade da vítima, independentemente do recebimento do resgate.",
+        D: "O estelionato exige que o agente obtenha vantagem ilícita em prejuízo alheio, induzindo a vítima em erro mediante fraude, sendo crime material.",
+        E: "A receptação dolosa e a receptação culposa têm a mesma pena prevista no Código Penal."
+      },
+      correta: "D",
+      fundamentacao: "O art. 171 do CP define estelionato: obter, para si ou para outrem, vantagem ilícita, em prejuízo alheio, induzindo ou mantendo alguém em erro, mediante artifício, ardil ou qualquer outro meio fraudulento. É crime material — consuma-se com a obtenção da vantagem ilícita. O crime de extorsão mediante sequestro (art. 159) é crime formal — consuma-se com o sequestro, independentemente do resgate. No roubo (art. 157), a violência ou grave ameaça são elementares, não elementos acidentais."
+    },
+    {
+      id: 51, materia: "Direito Penal",
+      enunciado: "Sobre as penas e sua aplicação no Código Penal, assinale a alternativa correta:",
+      alternativas: {
+        A: "Na primeira fase da dosimetria, o juiz fixa a pena-base considerando as atenuantes e agravantes.",
+        B: "As penas restritivas de direitos são autônomas e substituem a pena privativa de liberdade quando esta não for superior a 4 anos (crime doloso) ou qualquer pena (crime culposo).",
+        C: "O regime inicial fechado é obrigatório para todos os crimes hediondos, independentemente da pena aplicada.",
+        D: "A reincidência é circunstância atenuante que pode reduzir a pena abaixo do mínimo legal.",
+        E: "A pena de multa, quando não paga, converte-se em pena privativa de liberdade."
+      },
+      correta: "B",
+      fundamentacao: "O art. 44 do CP permite a substituição da pena privativa de liberdade por restritiva de direitos quando: a pena não superar 4 anos (crime doloso não violento) ou qualquer que seja a pena (crime culposo); o condenado não for reincidente em crime doloso; a culpabilidade, antecedentes, conduta social e personalidade indicarem suficiência. As penas restritivas são autônomas (art. 32, CP). O STF (HC 111.840) afastou a obrigatoriedade do regime fechado inicial para crimes hediondos. A multa não paga é cobrada como dívida ativa (art. 51, CP)."
+    },
+    {
+      id: 52, materia: "Direito Penal",
+      enunciado: "Sobre o crime de tipo misto alternativo, assinale a alternativa correta:",
+      alternativas: {
+        A: "O tipo misto alternativo possui vários núcleos e, se o agente praticar mais de um deles no mesmo contexto fático, responde por tantos crimes quantas forem as condutas.",
+        B: "O tipo misto alternativo possui vários núcleos e, se o agente praticar mais de um deles no mesmo contexto fático, responde por crime único.",
+        C: "O tipo misto cumulativo equivale ao tipo misto alternativo, ambos gerando concurso formal.",
+        D: "O crime de tráfico de drogas (art. 33 da Lei 11.343/2006) é exemplo de tipo misto cumulativo.",
+        E: "Nos tipos mistos alternativos, a prática de dois núcleos agrava obrigatoriamente a pena."
+      },
+      correta: "B",
+      fundamentacao: "O tipo misto alternativo (plurinuclear) descreve condutas equivalentes para a realização do tipo. Exemplos: tráfico de drogas (art. 33 da Lei 11.343/06 — importar, exportar, preparar, produzir, etc.) e receptação (art. 180 do CP). Se o agente praticar mais de um núcleo no mesmo contexto fático, responde por crime único, pois as condutas são alternativas (fungíveis). A prática de núcleos distintos em contextos fáticos diferentes pode configurar crimes autônomos em concurso."
+    },
+    /* ── DIREITO DO TRABALHO (4, 5, 6, 7, 8) ── */
+    {
+      id: 53, materia: "Direito do Trabalho",
+      enunciado: "Sobre o contrato de trabalho e seus elementos caracterizadores, assinale a alternativa correta:",
+      alternativas: {
+        A: "A prestação de serviços de forma eventual e sem pessoalidade exclui a configuração do vínculo empregatício.",
+        B: "A onerosidade é dispensável para a caracterização do contrato de emprego, podendo haver relação de emprego sem remuneração.",
+        C: "A subordinação jurídica é o único requisito para configuração do vínculo de emprego, dispensando os demais.",
+        D: "O contrato de trabalho intermitente, previsto pela Reforma Trabalhista, é incompatível com o registro em CTPS.",
+        E: "A terceirização de atividade-fim é vedada pela CLT após a Reforma Trabalhista de 2017."
+      },
+      correta: "A",
+      fundamentacao: "Os requisitos do contrato de emprego (art. 3º da CLT) são: pessoalidade, não eventualidade, onerosidade e subordinação jurídica. A ausência de qualquer desses elementos afasta o vínculo empregatício. A prestação eventual e sem pessoalidade indica relação de trabalho autônomo, não de emprego. O contrato intermitente (art. 443, §3º, CLT) deve ser registrado em CTPS. A Lei 13.467/2017 (Reforma Trabalhista) e a Lei 13.429/2017 permitem terceirização de qualquer atividade, inclusive a-fim."
+    },
+    {
+      id: 54, materia: "Direito do Trabalho",
+      enunciado: "Sobre o direito coletivo do trabalho e os instrumentos normativos coletivos, assinale a alternativa correta:",
+      alternativas: {
+        A: "A convenção coletiva de trabalho é celebrada entre sindicatos de trabalhadores e empresas individualmente consideradas.",
+        B: "O acordo coletivo de trabalho, por ser negociado diretamente entre empresa e empregados, prevalece sobre a convenção coletiva em qualquer hipótese.",
+        C: "A Constituição Federal veda a ultratividade das normas coletivas, cessando automaticamente seus efeitos com o término da vigência.",
+        D: "A convenção coletiva é celebrada entre sindicato de trabalhadores e sindicato de empregadores, podendo estabelecer condições de trabalho aplicáveis à respectiva categoria.",
+        E: "O dissídio coletivo pode ser ajuizado por qualquer trabalhador individualmente perante o Tribunal do Trabalho competente."
+      },
+      correta: "D",
+      fundamentacao: "O art. 611 da CLT define convenção coletiva de trabalho como o acordo de caráter normativo celebrado entre sindicato de empregados e sindicato de empregadores. O acordo coletivo (art. 611-A) é celebrado entre sindicato de empregados e empresa(s) individualmente. A Reforma Trabalhista (Lei 13.467/2017) vedou a ultratividade (art. 614, §3º). O dissídio coletivo é ajuizado pelos sindicatos ou pelo MP do Trabalho (art. 856 CLT), não por trabalhadores individuais."
+    },
+    {
+      id: 55, materia: "Direito do Trabalho",
+      enunciado: "Sobre o FGTS (Fundo de Garantia do Tempo de Serviço), assinale a alternativa correta:",
+      alternativas: {
+        A: "O FGTS é recolhido mensalmente pelo empregado, descontado de seu salário bruto, à alíquota de 8%.",
+        B: "O trabalhador avulso não tem direito ao FGTS, pois não possui vínculo empregatício formal.",
+        C: "O saque do FGTS é permitido em qualquer hipótese, bastando requerimento do trabalhador.",
+        D: "O FGTS é recolhido mensalmente pelo empregador, à alíquota de 8% sobre a remuneração do empregado, e pode ser sacado nas hipóteses previstas na Lei 8.036/90.",
+        E: "A multa de 40% incide sobre os depósitos feitos apenas nos últimos 3 anos do contrato."
+      },
+      correta: "D",
+      fundamentacao: "A Lei 8.036/90 e o art. 7º, III, da CF/88 regulam o FGTS. O empregador recolhe mensalmente 8% sobre a remuneração do empregado (não é desconto do salário). O saque é permitido nas hipóteses taxativas da lei: dispensa sem justa causa, aposentadoria, doenças graves, compra de imóvel, entre outras. O trabalhador avulso tem direito ao FGTS por força do art. 7º, XXXIV, da CF/88. A multa de 40% (art. 18, §1º) incide sobre o saldo total dos depósitos, não apenas dos últimos anos."
+    },
+    {
+      id: 56, materia: "Direito do Trabalho",
+      enunciado: "Sobre a equiparação salarial na CLT, após a Reforma Trabalhista de 2017, assinale a alternativa correta:",
+      alternativas: {
+        A: "A equiparação salarial exige que os empregados trabalhem para o mesmo empregador, na mesma localidade, exercendo a mesma função, com diferença de tempo no cargo superior a 4 anos.",
+        B: "A equiparação salarial foi extinta pela Reforma Trabalhista, substituída por planos de cargos e salários como único instrumento de isonomia.",
+        C: "Para que haja equiparação salarial, exige-se que os empregados (paradigma e paragonado) trabalhem para o mesmo empregador, na mesma localidade, exercendo a mesma função, com diferença de tempo no cargo não superior a 4 anos e no emprego não superior a 4 anos.",
+        D: "A existência de plano de cargos e salários homologado pelo sindicato elimina a possibilidade de equiparação salarial.",
+        E: "A equiparação salarial pode ser requerida entre empregados de empresas do mesmo grupo econômico, independentemente da localidade."
+      },
+      correta: "C",
+      fundamentacao: "O art. 461 da CLT, com a redação da Lei 13.467/2017, exige para equiparação salarial: mesmo empregador, mesma localidade (mesmo estabelecimento ou, por força de súmula, mesma região metropolitana), mesma função, produtividade e perfeição técnica equivalentes, diferença de tempo na função não superior a 4 anos e no emprego não superior a 4 anos. A existência de quadro de carreira homologado pela entidade sindical exclui a equiparação (art. 461, §2º, CLT)."
+    },
+    {
+      id: 57, materia: "Direito do Trabalho",
+      enunciado: "Sobre o assédio moral no ambiente de trabalho e a responsabilidade do empregador, assinale a alternativa correta:",
+      alternativas: {
+        A: "O assédio moral, por ser conduta interpessoal, não gera responsabilidade civil para o empregador.",
+        B: "O assédio moral praticado por preposto do empregador gera responsabilidade civil objetiva deste, independentemente de culpa.",
+        C: "Apenas o assédio moral vertical descendente (chefe para subordinado) é reconhecido pelo ordenamento jurídico brasileiro.",
+        D: "O assédio moral não configura justa causa para rescisão indireta do contrato de trabalho.",
+        E: "A reparação por dano moral decorrente de assédio no trabalho é excluída quando há acordo coletivo prevendo regras de conduta."
+      },
+      correta: "B",
+      fundamentacao: "O art. 927 do Código Civil e o art. 932, III, do CC estabelecem a responsabilidade do empregador pelos atos de seus prepostos. O TST firmou que o assédio moral praticado por supervisor/chefia no ambiente de trabalho gera responsabilidade civil do empregador — objetiva quando decorre de risco da atividade ou subjetiva com presunção de culpa in vigilando. O assédio pode ser vertical (ascendente ou descendente) ou horizontal (entre colegas). Configura justa causa (art. 483, 'd', CLT) para rescisão indireta."
+    },
+    /* ── DIREITO DO CONSUMIDOR (2) ── */
+    {
+      id: 58, materia: "Direito do Consumidor",
+      enunciado: "Sobre a responsabilidade pelo fato do produto no CDC, assinale a alternativa correta:",
+      alternativas: {
+        A: "A responsabilidade pelo fato do produto exige demonstração de culpa do fornecedor.",
+        B: "O fornecedor se exime de responsabilidade provando que colocou o produto no mercado sem defeito.",
+        C: "A responsabilidade pelo fato do produto é subjetiva para o comerciante e objetiva apenas para o fabricante.",
+        D: "O comerciante responde solidariamente com o fabricante pelo fato do produto em qualquer hipótese.",
+        E: "Apenas o consumidor direto (que adquiriu o produto) pode pleitear indenização pelo fato do produto."
+      },
+      correta: "B",
+      fundamentacao: "O art. 12 do CDC responsabiliza objetivamente o fabricante, produtor, construtor e importador pelos danos causados por defeitos nos produtos (fato do produto). As excludentes são: não colocação do produto no mercado; ausência de defeito; e culpa exclusiva do consumidor ou de terceiro (art. 12, §3º). O comerciante tem responsabilidade subsidiária (art. 13), respondendo solidariamente nas hipóteses dos incisos I, II e III. O bystander (terceiro não consumidor) também pode ser indenizado (art. 17 CDC)."
+    },
+    {
+      id: 59, materia: "Direito do Consumidor",
+      enunciado: "Sobre as práticas abusivas vedadas pelo CDC, assinale a alternativa correta:",
+      alternativas: {
+        A: "A venda casada (condicionamento da venda de um produto à aquisição de outro) é permitida quando prevista em contrato.",
+        B: "O fornecedor pode recusar o atendimento a consumidores sem justificativa plausível, pois vigora o princípio da autonomia privada.",
+        C: "É vedado ao fornecedor exigir do consumidor vantagem manifestamente excessiva, prevalecer-se de fraqueza ou ignorância do consumidor e realizar venda casada.",
+        D: "A publicidade comparativa é sempre vedada pelo CDC, independentemente de seu conteúdo.",
+        E: "O direito de arrependimento (7 dias) aplica-se a qualquer contrato de consumo, inclusive os celebrados presencialmente."
+      },
+      correta: "C",
+      fundamentacao: "O art. 39 do CDC elenca as práticas abusivas vedadas ao fornecedor, incluindo: exigir vantagem excessiva (inciso V), prevalecer-se da fraqueza ou ignorância do consumidor (inciso IV) e realizar venda casada (inciso I). A venda casada é vedada independentemente de previsão contratual. O direito de arrependimento (art. 49 CDC) aplica-se apenas às contratações fora do estabelecimento comercial (e-commerce, telefone, domicílio). A publicidade comparativa veraz e não enganosa é permitida."
+    },
+    /* ── DIREITO EMPRESARIAL (4) ── */
+    {
+      id: 60, materia: "Direito Empresarial",
+      enunciado: "Sobre os títulos de crédito e seus princípios, assinale a alternativa correta:",
+      alternativas: {
+        A: "O princípio da literalidade significa que o título de crédito vale pelo que nele está escrito, sendo ineficazes acordos extracartulares perante terceiros de boa-fé.",
+        B: "O princípio da autonomia impede que o devedor oponha exceções pessoais ao portador originário do título.",
+        C: "A cartularidade exige que o título de crédito seja necessariamente emitido em papel físico, sendo inválidos os títulos eletrônicos.",
+        D: "O endosso transfiere o título, mas não garante o pagamento, respondendo o endossante apenas pelos vícios formais.",
+        E: "A abstração é princípio presente em todos os títulos de crédito, sem exceção."
+      },
+      correta: "A",
+      fundamentacao: "O princípio da literalidade (art. 887 do CC e legislação cambiária) determina que o título de crédito produz os efeitos nele declarados. Acordos extracartulares não oponíveis a terceiros de boa-fé preservam a segurança do tráfico. A autonomia garante que o portador legítimo adquire direito próprio, independente dos vícios das relações anteriores. O endosso garante o pagamento (endossante é coobrigado). Títulos eletrônicos são admitidos (Lei 13.775/2018 — duplicata escritural). A abstração não é universal — a duplicata mantém causa."
+    },
+    {
+      id: 61, materia: "Direito Empresarial",
+      enunciado: "Sobre a sociedade limitada no Código Civil, assinale a alternativa correta:",
+      alternativas: {
+        A: "Na sociedade limitada, os sócios respondem solidariamente e ilimitadamente pelas obrigações sociais.",
+        B: "A exclusão de sócio minoritário da sociedade limitada é vedada, pois viola o princípio da affectio societatis.",
+        C: "A sociedade limitada pode ser administrada por não sócio, desde que o contrato social o permita e os sócios aprovem por unanimidade.",
+        D: "O capital social da sociedade limitada deve ser integralizado em dinheiro, sendo vedada a integralização em bens.",
+        E: "A sociedade limitada com sócio único (EIRELI) foi extinta pelo CC de 2002, sendo vedada atualmente."
+      },
+      correta: "C",
+      fundamentacao: "O art. 1.061 do Código Civil permite que a administração da sociedade limitada seja delegada a não sócio, desde que o contrato social o permita expressamente e a designação seja aprovada por votos correspondentes a 2/3 do capital social (após a Lei 13.792/2019, que alterou o quórum). A responsabilidade dos sócios é limitada ao valor de suas quotas, mas solidária pela integralização do capital (art. 1.052). A integralização pode ser feita em dinheiro ou bens (art. 1.055). A EIRELI foi extinta pela Lei 14.195/2021, substituída pela SLU."
+    },
+    {
+      id: 62, materia: "Direito Empresarial",
+      enunciado: "Sobre a recuperação judicial de empresas (Lei 11.101/2005), assinale a alternativa correta:",
+      alternativas: {
+        A: "A recuperação judicial abrange todos os credores, inclusive os titulares de créditos trabalhistas e fiscais.",
+        B: "O plano de recuperação judicial deve ser aprovado por unanimidade na assembleia de credores.",
+        C: "Durante o período de stay period (suspensão de ações e execuções), de 180 dias, nenhuma execução pode prosseguir, inclusive as de natureza fiscal.",
+        D: "A recuperação judicial exclui da sujeição os créditos fiscais, trabalhistas até 150 salários mínimos por credor e de acidente de trabalho.",
+        E: "O devedor em recuperação judicial não pode alienar bens do ativo permanente sem autorização judicial e concordância da assembleia de credores."
+      },
+      correta: "D",
+      fundamentacao: "O art. 49 da Lei 11.101/2005 sujeita à recuperação judicial todos os créditos existentes na data do pedido. Porém, o §3º exclui os créditos de proprietários fiduciários, arrendadores mercantis, vendedores com reserva de domínio, etc. Os créditos trabalhistas acima de 150 salários mínimos e os créditos fiscais não se sujeitam ao plano. O stay period é de 180 dias, prorrogável uma vez (Lei 14.112/2020), e não suspende execuções fiscais. O plano é aprovado por maioria qualificada, não unanimidade."
+    },
+    {
+      id: 63, materia: "Direito Empresarial",
+      enunciado: "Sobre o contrato de seguro no Código Civil, assinale a alternativa correta:",
+      alternativas: {
+        A: "O contrato de seguro é unilateral, pois apenas o segurador assume obrigações.",
+        B: "No seguro de dano, o segurado pode contratar seguro por valor superior ao bem segurado para obter lucro em caso de sinistro.",
+        C: "O contrato de seguro é de máxima boa-fé (uberrimae fidei), exigindo do segurado a declaração verdadeira e completa de todas as circunstâncias que possam influir na aceitação do risco.",
+        D: "O prêmio do seguro é a indenização paga pelo segurador ao segurado em caso de sinistro.",
+        E: "No seguro de vida, o capital segurado é penhorável por credores do beneficiário."
+      },
+      correta: "C",
+      fundamentacao: "O art. 765 do Código Civil consagra o princípio da boa-fé máxima (uberrimae fidei) nos contratos de seguro: o segurado e o segurador são obrigados a guardar na conclusão e na execução do contrato, a mais estrita boa-fé e veracidade, tanto a respeito do objeto como das circunstâncias e declarações a ele concernentes. O prêmio é o que o segurado paga; a indenização (sinistro) é o que o segurador paga. O capital do seguro de vida é impenhorável (art. 649, VI, CPC)."
+    },
+    /* ── DIREITO PROCESSUAL CIVIL (6) ── */
+    {
+      id: 64, materia: "Direito Processual Civil",
+      enunciado: "Sobre os princípios processuais no CPC/2015, assinale a alternativa correta:",
+      alternativas: {
+        A: "O princípio do contraditório é satisfeito com a mera citação do réu, independentemente de real oportunidade de influir na decisão.",
+        B: "O CPC/2015 adota o princípio da primazia do julgamento do mérito, determinando que o juiz dê oportunidade de saneamento de vícios antes de extinguir o processo sem resolução do mérito.",
+        C: "O princípio da cooperação impõe deveres apenas às partes, não ao juiz.",
+        D: "A decisão judicial não precisa ser fundamentada quando o juiz acolhe expressamente os fundamentos de uma das partes.",
+        E: "O princípio da duração razoável do processo não vincula o juiz, sendo apenas uma diretriz programática."
+      },
+      correta: "B",
+      fundamentacao: "O art. 4º do CPC/2015 consagra a primazia da decisão de mérito: as partes têm direito à solução integral do mérito. Os arts. 139, IX, e 317 determinam que o juiz deve, antes de extinguir o processo por vício sanável, intimar o autor para corrigi-lo. O contraditório no CPC/2015 é substancial — direito de influir na decisão (art. 9º e 10). A cooperação (art. 6º) vincula partes e juiz. A fundamentação é exigida mesmo quando adotados fundamentos de uma das partes (art. 489, §1º, V)."
+    },
+    {
+      id: 65, materia: "Direito Processual Civil",
+      enunciado: "Sobre a tutela provisória no CPC/2015, assinale a alternativa correta:",
+      alternativas: {
+        A: "A tutela de urgência antecipada e a tutela cautelar têm os mesmos requisitos e produzem os mesmos efeitos.",
+        B: "A tutela da evidência pode ser concedida independentemente de periculum in mora, bastando a probabilidade do direito em hipóteses específicas.",
+        C: "A tutela antecipada requerida em caráter antecedente não pode ser estabilizada se o réu interpuser recurso.",
+        D: "O juiz não pode conceder tutela de urgência de ofício em nenhuma hipótese.",
+        E: "A tutela provisória, uma vez concedida, é irrevogável até o julgamento final do mérito."
+      },
+      correta: "B",
+      fundamentacao: "O art. 311 do CPC/2015 prevê a tutela da evidência, que prescinde de demonstração de perigo de dano ou risco ao resultado útil do processo, bastando que: (I) a defesa seja abusiva e a documentação apresentada seja relevante; (II) as alegações de fato possam ser comprovadas documentalmente e haja jurisprudência consolidada; (III) pedido reipersecutório fundado em prova documental; (IV) crédito presumidamente líquido. A tutela antecipada antecedente se estabiliza se o réu não recorrer (art. 304). Tutelas provisórias são revogáveis ou modificáveis (art. 296)."
+    },
+    {
+      id: 66, materia: "Direito Processual Civil",
+      enunciado: "Sobre os recursos no CPC/2015, assinale a alternativa correta:",
+      alternativas: {
+        A: "O agravo de instrumento é cabível contra qualquer decisão interlocutória proferida no processo.",
+        B: "Os embargos de declaração não interrompem o prazo para interposição de outros recursos.",
+        C: "O recurso especial pode ser interposto ao STJ quando a decisão recorrida contrariar tratado ou lei federal, ou negar-lhes vigência.",
+        D: "O recurso ordinário constitucional cabe das decisões dos Tribunais Superiores em processos de competência originária.",
+        E: "A apelação tem efeito suspensivo automático em todos os casos, independentemente do objeto da decisão apelada."
+      },
+      correta: "C",
+      fundamentacao: "O art. 105, III, da CF/88 prevê o recurso especial ao STJ quando a decisão recorrida: contrariar tratado ou lei federal ou negar-lhes vigência; julgar válido ato de governo local contestado em face de lei federal; ou der à lei federal interpretação divergente da que lhe haja atribuído outro tribunal. O agravo de instrumento cabe contra decisões taxativamente previstas no art. 1.015. Os embargos de declaração interrompem o prazo para outros recursos (art. 1.026, §1º). A apelação tem efeito suspensivo, salvo exceções do art. 1.012."
+    },
+    {
+      id: 67, materia: "Direito Processual Civil",
+      enunciado: "Sobre a coisa julgada no CPC/2015, assinale a alternativa correta:",
+      alternativas: {
+        A: "A coisa julgada material alcança toda a fundamentação da sentença, vinculando as partes quanto às questões incidentalmente decididas.",
+        B: "A coisa julgada formal impede a repropositura da mesma ação em outro processo.",
+        C: "A coisa julgada material se forma sobre o dispositivo da sentença de mérito transitada em julgado, tornando imutável e indiscutível a decisão.",
+        D: "A ação rescisória pode ser proposta a qualquer tempo, pois a injustiça da decisão não pode ser perpetuada.",
+        E: "A relativização da coisa julgada é aceita pelo STF em qualquer hipótese em que a sentença seja injusta."
+      },
+      correta: "C",
+      fundamentacao: "O art. 502 do CPC/2015 define coisa julgada material como a autoridade que torna imutável e indiscutível a decisão de mérito não mais sujeita a recurso. Forma-se sobre o dispositivo da sentença (art. 504). A coisa julgada formal impede a modificação da decisão no mesmo processo, não a repropositura em ação distinta. Os fundamentos, em regra, não fazem coisa julgada, salvo quando objeto de decisão expressa (questão prejudicial — art. 503, §1º). A ação rescisória tem prazo de 2 anos (art. 975)."
+    },
+    {
+      id: 68, materia: "Direito Processual Civil",
+      enunciado: "Sobre o cumprimento de sentença no CPC/2015, assinale a alternativa correta:",
+      alternativas: {
+        A: "No cumprimento de sentença para pagamento de quantia certa, o executado tem 15 dias para pagar espontaneamente, sob pena de multa de 10% e honorários de 10%.",
+        B: "A impugnação ao cumprimento de sentença tem efeito suspensivo automático.",
+        C: "O cumprimento provisório de sentença é vedado quando há recurso com efeito suspensivo.",
+        D: "A multa do art. 523 (10%) não incide quando o executado oferecer bens à penhora no prazo de 15 dias.",
+        E: "O cumprimento de sentença para entrega de coisa certa não admite multa (astreintes)."
+      },
+      correta: "A",
+      fundamentacao: "O art. 523 do CPC/2015 estabelece que, no cumprimento de sentença para pagamento de quantia certa, o executado será intimado para pagar em 15 dias, sob pena de multa de 10% e honorários advocatícios de 10% sobre o valor da execução. A impugnação não tem efeito suspensivo automático — o juiz pode concedê-lo em caso de periculum in mora e probabilidade do direito (art. 525, §6º). O cumprimento provisório é cabível quando há recurso sem efeito suspensivo (art. 520)."
+    },
+    {
+      id: 69, materia: "Direito Processual Civil",
+      enunciado: "Sobre a ação popular e a ação civil pública, assinale a alternativa correta:",
+      alternativas: {
+        A: "A ação popular pode ser proposta por qualquer pessoa física ou jurídica para anular ato lesivo ao patrimônio público.",
+        B: "A ação civil pública é instrumento exclusivo do Ministério Público para a tutela de interesses difusos e coletivos.",
+        C: "A ação popular, proposta por cidadão (eleitor), visa anular ato lesivo ao patrimônio público, à moralidade administrativa, ao meio ambiente e ao patrimônio histórico-cultural, sendo o autor isento de custas e ônus de sucumbência, salvo má-fé.",
+        D: "A ação civil pública não pode ter como objeto a condenação em dinheiro, apenas obrigação de fazer ou não fazer.",
+        E: "A coisa julgada na ação civil pública é sempre erga omnes, independentemente do resultado."
+      },
+      correta: "C",
+      fundamentacao: "O art. 5º, LXXIII, da CF/88 e a Lei 4.717/65 regulam a ação popular: qualquer cidadão (eleitor) pode ajuizá-la para anular ato lesivo ao patrimônio público ou de entidade de que o Estado participe, à moralidade administrativa, ao meio ambiente e ao patrimônio histórico e cultural. O autor está isento de custas e ônus de sucumbência, salvo comprovada má-fé. A ACP (Lei 7.347/85) pode ser proposta pelo MP, Defensoria, entes públicos e associações. A coisa julgada é secundum eventum litis (art. 16 da Lei 7.347/85)."
+    },
+    /* ── DIREITO PROCESSUAL PENAL (6) ── */
+    {
+      id: 70, materia: "Direito Processual Penal",
+      enunciado: "Sobre o inquérito policial, assinale a alternativa correta:",
+      alternativas: {
+        A: "O inquérito policial é indispensável para o oferecimento da denúncia pelo Ministério Público.",
+        B: "O inquérito policial tem natureza jurisdicional, sendo presidido pelo Delegado de Polícia com poderes de juiz.",
+        C: "O indiciado no inquérito policial tem direito ao contraditório e à ampla defesa plenos.",
+        D: "O inquérito policial é procedimento administrativo, inquisitório, dispensável, e seus elementos informativos não podem, por si sós, fundamentar condenação.",
+        E: "O arquivamento do inquérito pelo juiz, a pedido do MP, gera coisa julgada material, impedindo reabertura."
+      },
+      correta: "D",
+      fundamentacao: "O inquérito policial é procedimento administrativo investigatório, presidido pelo Delegado de Polícia (não pelo juiz). É inquisitório — sem contraditório pleno — e dispensável, podendo o MP oferecer denúncia com base em outras peças de informação (art. 39, §5º, CPP). O art. 155 do CPP veda que o juiz fundamente a condenação exclusivamente nos elementos colhidos no inquérito (sem contraditório judicial). O arquivamento do inquérito, em regra, não faz coisa julgada material, salvo extinção da punibilidade."
+    },
+    {
+      id: 71, materia: "Direito Processual Penal",
+      enunciado: "Sobre as prisões cautelares no CPP, assinale a alternativa correta:",
+      alternativas: {
+        A: "A prisão preventiva pode ser decretada de ofício pelo juiz durante a fase de investigação policial.",
+        B: "A prisão temporária é cabível em qualquer crime, sendo decretada pelo prazo de 5 dias, prorrogável por igual período.",
+        C: "A prisão em flagrante, por si só, não impõe ao preso o cumprimento de pena antecipada; cabe ao juiz, em 24 horas, converter em preventiva, relaxar ou conceder liberdade provisória.",
+        D: "A fiança pode ser concedida pelo Delegado de Polícia apenas nos crimes afiançáveis com pena máxima superior a 4 anos.",
+        E: "A prisão preventiva não pode ser decretada contra réu primário e de bons antecedentes."
+      },
+      correta: "C",
+      fundamentacao: "O art. 310 do CPP (com redação dada pela Lei 13.964/2019 — Pacote Anticrime) determina que, em até 24 horas após a prisão em flagrante, o juiz deve: relaxar a prisão ilegal; converter em preventiva se presentes os requisitos; ou conceder liberdade provisória com ou sem fiança. O pacote anticrime vedou a decretação de preventiva de ofício na fase investigativa (art. 282, §2º, CPP). A prisão temporária (Lei 7.960/89) é restrita a crimes específicos. O Delegado pode arbitrar fiança nos crimes com pena máxima até 4 anos (art. 322 CPP)."
+    },
+    {
+      id: 72, materia: "Direito Processual Penal",
+      enunciado: "Sobre a prova no processo penal, assinale a alternativa correta:",
+      alternativas: {
+        A: "O juiz criminal está vinculado ao sistema da prova legal, devendo dar valor predeterminado a cada meio de prova.",
+        B: "A confissão extrajudicial, por si só, é suficiente para fundamentar sentença condenatória.",
+        C: "As provas obtidas por meios ilícitos são inadmissíveis no processo penal, sendo também inadmissíveis as provas delas derivadas (teoria dos frutos da árvore envenenada), salvo exceções.",
+        D: "O depoimento da vítima tem valor probatório superior ao dos demais depoimentos, bastando para a condenação.",
+        E: "O ônus da prova no processo penal é distribuído igualmente entre acusação e defesa."
+      },
+      correta: "C",
+      fundamentacao: "O art. 5º, LVI, da CF/88 veda as provas obtidas por meios ilícitos. O art. 157 do CPP prevê a teoria dos frutos da árvore envenenada (fruits of the poisonous tree): são inadmissíveis as provas derivadas das ilícitas, salvo quando não evidenciado o nexo de causalidade ou quando as derivadas puderem ser obtidas por fonte independente. O CPP adota o livre convencimento motivado (art. 155). No processo penal, o ônus da prova é da acusação — in dubio pro reo."
+    },
+    {
+      id: 73, materia: "Direito Processual Penal",
+      enunciado: "Sobre o júri popular, conforme a CF/88 e o CPP, assinale a alternativa correta:",
+      alternativas: {
+        A: "O Tribunal do Júri é competente para julgamento de todos os crimes dolosos.",
+        B: "A decisão de pronúncia exige prova plena da materialidade e da autoria do crime.",
+        C: "Os jurados decidem de forma sigilosa e soberana, sendo vedada a apelação com fundamento em contrariedade à prova dos autos.",
+        D: "O Tribunal do Júri é constituído por 7 jurados, e a decisão é tomada por maioria simples (4 votos).",
+        E: "A impronúncia faz coisa julgada material, impedindo novo julgamento mesmo se surgirem novas provas."
+      },
+      correta: "D",
+      fundamentacao: "O art. 447 do CPP estabelece que o Tribunal do Júri é composto por 25 jurados (sorteados), dos quais 7 serão escolhidos para a sessão. A decisão é tomada por maioria (4 votos), sendo os votos secretos para preservar a soberania dos veredictos. O Júri é competente para crimes dolosos contra a vida (art. 5º, XXXVIII, CF). A pronúncia exige apenas fumus comissi delicti — indícios de autoria e prova da materialidade (in dubio pro societate). A impronúncia não faz coisa julgada material — admite repropositura se houver novas provas (art. 414, parágrafo único, CPP)."
+    },
+    {
+      id: 74, materia: "Direito Processual Penal",
+      enunciado: "Sobre os meios de impugnação no processo penal, assinale a alternativa correta:",
+      alternativas: {
+        A: "A revisão criminal pode ser proposta pelo Ministério Público em favor do réu condenado.",
+        B: "O habeas corpus pode ser utilizado como substitutivo de recurso ordinário em qualquer hipótese.",
+        C: "O recurso em sentido estrito cabe contra sentença que absolve sumariamente o réu.",
+        D: "A apelação criminal deve ser interposta no prazo de 5 dias e as razões podem ser apresentadas após a interposição.",
+        E: "O recurso especial e o recurso extraordinário não têm efeito suspensivo automático em matéria criminal."
+      },
+      correta: "D",
+      fundamentacao: "O art. 593 do CPP prevê a apelação contra sentença definitiva de condenação ou absolvição, com prazo de 5 dias para interposição (art. 593, §3º c/c art. 600). As razões podem ser apresentadas após a interposição — prazo de 8 dias (art. 600). A revisão criminal pode ser proposta pelo próprio réu, por procurador ou, após a morte, por cônjuge, ascendente, descendente ou irmão (art. 623); o MP não pode propô-la. O HC não é substitutivo de recurso ordinário (Súmulas 691 e 694 do STF). O RESES cabe contra decisões do art. 581 do CPP, não contra absolvição sumária."
+    },
+    {
+      id: 75, materia: "Direito Processual Penal",
+      enunciado: "Sobre a ação penal e suas espécies, assinale a alternativa correta:",
+      alternativas: {
+        A: "A ação penal pública incondicionada depende de representação da vítima para ser iniciada.",
+        B: "Na ação penal privada, o Ministério Público é parte principal, cabendo à vítima apenas o papel de assistente.",
+        C: "A renúncia ao direito de queixa, em relação a um dos autores do crime, estende-se a todos os demais, nos crimes de ação penal privada.",
+        D: "A decadência do direito de queixa opera-se em 6 meses a contar do trânsito em julgado da sentença condenatória.",
+        E: "A perempção é causa de extinção da punibilidade aplicável à ação penal pública."
+      },
+      correta: "C",
+      fundamentacao: "O art. 49 do CPP estabelece que a renúncia ao exercício do direito de queixa, em relação a um dos autores do crime, a todos se estenderá (princípio da indivisibilidade da ação penal privada). A ação penal pública incondicionada independe de representação; a condicionada depende. Na ação penal privada, o querelante é o titular da ação. A decadência (art. 103 CP) opera-se em 6 meses do conhecimento da autoria, não do trânsito em julgado. A perempção (art. 60 CPP) é aplicável apenas à ação penal privada."
+    },
+    /* ── DIREITO PREVIDENCIÁRIO (2) ── */
+    {
+      id: 76, materia: "Direito Previdenciário",
+      enunciado: "Sobre os benefícios do Regime Geral de Previdência Social (RGPS), assinale a alternativa correta:",
+      alternativas: {
+        A: "A aposentadoria por incapacidade permanente (antiga aposentadoria por invalidez) é devida ao segurado que se tornar incapaz para seu trabalho habitual, mantido o valor mesmo que necessite de assistência permanente.",
+        B: "O auxílio-doença é benefício permanente, pago enquanto durar a incapacidade do segurado.",
+        C: "A aposentadoria por incapacidade permanente tem seu valor acrescido de 25% quando o segurado necessitar de assistência permanente de outra pessoa.",
+        D: "O salário-maternidade é benefício previdenciário devido apenas às seguradas empregadas, não às contribuintes individuais.",
+        E: "O auxílio-acidente é benefício due somente quando o acidente resultar em incapacidade total para o trabalho."
+      },
+      correta: "C",
+      fundamentacao: "O art. 45 da Lei 8.213/91 prevê que o valor da aposentadoria por incapacidade permanente (ex-aposentadoria por invalidez) será acrescido de 25% quando o segurado necessitar da assistência permanente de outra pessoa, conforme a lista do Anexo I do Regulamento. O acréscimo é concedido mesmo que o valor da aposentadoria ultrapasse o teto do RGPS. O auxílio-doença (atual auxílio por incapacidade temporária) é benefício temporário. O salário-maternidade é devido a todas as seguradas (art. 71 da Lei 8.213/91)."
+    },
+    {
+      id: 77, materia: "Direito Previdenciário",
+      enunciado: "Sobre as contribuições previdenciárias e o custeio da seguridade social, assinale a alternativa correta:",
+      alternativas: {
+        A: "A contribuição previdenciária patronal incide sobre o lucro da empresa, não sobre a folha de pagamentos.",
+        B: "O MEI (Microempreendedor Individual) recolhe contribuição previdenciária de 20% sobre o salário de contribuição.",
+        C: "A seguridade social é financiada por toda a sociedade, mediante contribuições sociais e recursos orçamentários da União, Estados e Municípios.",
+        D: "O empregado doméstico não é segurado obrigatório do RGPS.",
+        E: "As contribuições sociais destinadas à seguridade social são tributos vinculados, pois sua receita está afetada a fim específico."
+      },
+      correta: "C",
+      fundamentacao: "O art. 195, caput, da CF/88 estabelece que a seguridade social será financiada por toda a sociedade, de forma direta e indireta, nos termos da lei, mediante recursos provenientes dos orçamentos da União, dos Estados, do DF e dos Municípios, e das contribuições sociais. O MEI recolhe contribuição reduzida (5% do salário mínimo). As contribuições sociais são tributos não vinculados quanto à hipótese de incidência, mas vinculados quanto à destinação (parafiscalidade). O empregado doméstico é segurado obrigatório (art. 11, II, Lei 8.213/91)."
+    },
+    /* ── DIREITO PROCESSUAL DO TRABALHO (3) ── */
+    {
+      id: 78, materia: "Direito Processual do Trabalho",
+      enunciado: "Sobre a competência da Justiça do Trabalho conforme a CF/88, assinale a alternativa correta:",
+      alternativas: {
+        A: "A Justiça do Trabalho é competente apenas para julgar conflitos entre empregados e empregadores com vínculo formal (CTPS assinada).",
+        B: "A Justiça do Trabalho é competente para processar e julgar as ações oriundas da relação de trabalho, abrangendo também lides entre trabalhadores autônomos e tomadores de serviço.",
+        C: "A Justiça do Trabalho não tem competência para executar contribuições previdenciárias resultantes de suas decisões.",
+        D: "O servidor público estatutário que alega relação de emprego deve acionar a Justiça do Trabalho.",
+        E: "A Justiça do Trabalho é competente para julgar ações de indenização por dano moral entre trabalhadores e terceiros sem relação de trabalho."
+      },
+      correta: "B",
+      fundamentacao: "O art. 114 da CF/88 (com redação dada pela EC 45/2004) atribui à Justiça do Trabalho competência para processar e julgar as ações oriundas da relação de trabalho, não apenas da relação de emprego. Assim, abrange trabalhadores autônomos, avulsos, eventuais, etc. O art. 114, VIII, confere competência para executar contribuições previdenciárias. Servidores estatutários têm lide julgada pela Justiça Comum Federal ou Estadual (Súmula Vinculante 43 do STF)."
+    },
+    {
+      id: 79, materia: "Direito Processual do Trabalho",
+      enunciado: "Sobre o processo do trabalho e suas peculiaridades, assinale a alternativa correta:",
+      alternativas: {
+        A: "O reclamante deve estar sempre assistido por advogado no processo trabalhista, sendo vedada a reclamação verbal.",
+        B: "A CLT adota o princípio da conciliação obrigatória, sendo nula a sentença proferida sem tentativa de conciliação.",
+        C: "Os prazos processuais na Justiça do Trabalho são contados em dobro para a Fazenda Pública.",
+        D: "O recurso ordinário trabalhista deve ser interposto no prazo de 8 dias, e sua admissibilidade condiciona-se ao depósito recursal.",
+        E: "A Súmula do TST tem força vinculante idêntica à Súmula Vinculante do STF, obrigando todos os órgãos do Judiciário."
+      },
+      correta: "D",
+      fundamentacao: "O art. 895 da CLT prevê o recurso ordinário, com prazo de 8 dias. O art. 899 exige o depósito recursal como pressuposto de admissibilidade para recursos do reclamado (garantia futura da execução). A reclamação verbal é permitida (art. 840, CLT), mas cada vez mais é exigida a forma escrita. A tentativa de conciliação (art. 764 CLT) é importante, mas sua ausência não gera nulidade absoluta. A Fazenda Pública tem prazo em quádruplo para contestar e em dobro para recorrer (art. 1.003, §6º, CPC, aplicado subsidiariamente)."
+    },
+    {
+      id: 80, materia: "Direito Processual do Trabalho",
+      enunciado: "Sobre a execução trabalhista e a desconsideração da personalidade jurídica na Justiça do Trabalho, assinale a alternativa correta:",
+      alternativas: {
+        A: "A desconsideração da personalidade jurídica na Justiça do Trabalho é automática após o esgotamento dos bens da empresa.",
+        B: "O incidente de desconsideração da personalidade jurídica, previsto no CPC/2015, aplica-se ao processo do trabalho, devendo ser instaurado a requerimento da parte.",
+        C: "Os sócios respondem ilimitadamente pelas dívidas trabalhistas desde o início do processo, independentemente de desconsideração.",
+        D: "A desconsideração inversa da personalidade jurídica não é admitida na Justiça do Trabalho.",
+        E: "O grupo econômico trabalhista (solidariedade ativa e passiva entre empresas) dispensa a desconsideração da personalidade jurídica para atingir os bens de empresa coligada."
+      },
+      correta: "E",
+      fundamentacao: "O art. 2º, §2º, da CLT prevê o grupo econômico trabalhista (consórcio de empregadores): as empresas do mesmo grupo econômico são solidariamente responsáveis pelas obrigações trabalhistas. Não é necessária a desconsideração da personalidade jurídica — a solidariedade é direta. O TST (Súmula 205, cancelada, e jurisprudência atual) e o art. 2º, §3º, da CLT (inserido pela Reforma Trabalhista) detalham os requisitos. O incidente de desconsideração (CPC/2015, arts. 133 a 137) aplica-se subsidiariamente ao processo do trabalho (art. 855-A da CLT)."
     }
   ];
 
   var estado = {
     questoesSelecionadas: [],
     indiceAtual: 0,
-    resultados: [],
-    qtd: 10,
-    respondida: false
+    respostas: [],   /* { letra: 'A'|null, acertou: bool|null } por índice */
+    qtd: 10
   };
 
   function embaralhar(arr) {
@@ -630,69 +1453,95 @@
     return a;
   }
 
+  function filtrarOpcoes(valor) {
+    var sel = document.getElementById('materia-select');
+    var v = valor.toLowerCase().trim();
+    Array.from(sel.options).forEach(function(opt) {
+      opt.hidden = v && opt.text.toLowerCase().indexOf(v) === -1;
+    });
+    if (v) {
+      var visivel = Array.from(sel.options).find(function(o) { return !o.hidden; });
+      if (visivel) sel.value = visivel.value;
+    } else {
+      sel.value = 'todas';
+    }
+  }
+
   function selecionarQtd(btn) {
     document.querySelectorAll('.forja-qtd-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     estado.qtd = parseInt(btn.getAttribute('data-qtd'));
   }
 
-  function filtrarQuestoes(materia, quantidade) {
-    var pool = materia === 'todas' ? questoes : questoes.filter(function(q) { return q.materia === materia; });
-    return embaralhar(pool).slice(0, Math.min(quantidade, pool.length));
-  }
-
   function iniciarSimulado() {
     var materia = document.getElementById('materia-select').value;
-    var selecionadas = filtrarQuestoes(materia, estado.qtd);
-    if (selecionadas.length === 0) { alert('Não há questões disponíveis para a matéria e quantidade selecionadas.'); return; }
+    var pool = materia === 'todas' ? questoes : questoes.filter(function(q) { return q.materia === materia; });
+    var selecionadas = embaralhar(pool).slice(0, Math.min(estado.qtd, pool.length));
+    if (selecionadas.length === 0) { alert('Não há questões disponíveis para essa seleção.'); return; }
     estado.questoesSelecionadas = selecionadas;
     estado.indiceAtual = 0;
-    estado.resultados = [];
-    estado.respondida = false;
+    estado.respostas = selecionadas.map(function() { return { letra: null, acertou: null }; });
     document.getElementById('forja-filtros').style.display = 'none';
     document.getElementById('forja-resultado').classList.remove('visible');
     document.getElementById('forja-arena').classList.add('visible');
     renderizarQuestao(0);
-    document.getElementById('forja-arena').scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function renderizarQuestao(idx) {
-    estado.respondida = false;
     var q = estado.questoesSelecionadas[idx];
     var total = estado.questoesSelecionadas.length;
+    var resp = estado.respostas[idx];
+    var jaRespondida = resp.letra !== null;
+
     document.getElementById('arena-contador').textContent = 'QUESTÃO ' + (idx + 1) + ' DE ' + total;
-    document.getElementById('arena-materia-label').textContent = q.materia.toUpperCase();
-    document.getElementById('progress-fill').style.width = Math.round((idx / total) * 100) + '%';
+    document.getElementById('progress-fill').style.width = Math.round(((idx + (jaRespondida ? 1 : 0)) / total) * 100) + '%';
+
+    /* botões de navegação */
+    var btnAnt = document.getElementById('btn-anterior');
+    var btnProx = document.getElementById('btn-proxima');
+    btnAnt.style.display = idx > 0 ? '' : 'none';
+    btnProx.style.display = jaRespondida ? '' : 'none';
+    btnProx.textContent = (idx + 1 < total) ? 'Próxima ›' : 'Ver Resultado';
+
     var letras = ['A','B','C','D','E'];
     var altsHtml = letras.map(function(l) {
-      return '<button class="forja-alt" onclick="responder(\'' + l + '\')" data-alt="' + l + '">' +
+      var cls = 'forja-alt';
+      var icone = '';
+      if (jaRespondida) {
+        if (l === q.correta) { cls += ' correta'; icone = '✓'; }
+        else if (l === resp.letra && !resp.acertou) { cls += ' errada'; icone = '✗'; }
+      }
+      var disabled = jaRespondida ? ' disabled' : '';
+      var onclick = jaRespondida ? '' : ' onclick="responder(\'' + l + '\')"';
+      return '<button class="' + cls + '"' + onclick + disabled + ' data-alt="' + l + '">' +
         '<span class="forja-alt__letra">' + l + '</span>' +
         '<span class="forja-alt__texto">' + q.alternativas[l] + '</span>' +
-        '<span class="forja-alt__icone"></span>' +
+        '<span class="forja-alt__icone">' + icone + '</span>' +
       '</button>';
     }).join('');
-    var proximoLabel = (idx + 1 < total) ? 'PRÓXIMA QUESTÃO' : 'VER RESULTADO';
-    var proximoFn = (idx + 1 < total) ? 'proximaQuestao()' : 'finalizarSimulado()';
+
+    var fundVisivel = jaRespondida ? ' visible' : '';
+    var fundDisplay = jaRespondida ? 'block' : 'none';
+
     document.getElementById('forja-card').innerHTML =
       '<span class="forja-card__badge">' + q.materia + '</span>' +
       '<p class="forja-card__enunciado">' + q.enunciado + '</p>' +
       '<div class="forja-alternativas">' + altsHtml + '</div>' +
-      '<div class="forja-fundamentacao" id="fundamentacao-box">' +
+      '<div class="forja-fundamentacao' + fundVisivel + '" id="fundamentacao-box" style="display:' + fundDisplay + '">' +
         '<div class="forja-fund__sep"></div>' +
         '<p class="forja-fund__label">Fundamentação</p>' +
         '<p class="forja-fund__texto">' + q.fundamentacao + '</p>' +
-      '</div>' +
-      '<div class="forja-next-wrap" id="next-wrap" style="display:none">' +
-        '<button class="btn-primary" onclick="' + proximoFn + '">' + proximoLabel + '</button>' +
       '</div>';
   }
 
   function responder(letra) {
-    if (estado.respondida) return;
-    estado.respondida = true;
-    var q = estado.questoesSelecionadas[estado.indiceAtual];
+    var idx = estado.indiceAtual;
+    if (estado.respostas[idx].letra !== null) return;
+    var q = estado.questoesSelecionadas[idx];
     var acertou = letra === q.correta;
-    estado.resultados.push({ acertou: acertou, materia: q.materia, enunciado: q.enunciado });
+    estado.respostas[idx] = { letra: letra, acertou: acertou };
+
     document.querySelectorAll('.forja-alt').forEach(function(btn) {
       btn.disabled = true;
       var l = btn.getAttribute('data-alt');
@@ -700,53 +1549,149 @@
       if (l === q.correta) { btn.classList.add('correta'); icone.textContent = '✓'; }
       else if (l === letra && !acertou) { btn.classList.add('errada'); icone.textContent = '✗'; }
     });
+
     var fundBox = document.getElementById('fundamentacao-box');
     fundBox.style.display = 'block';
     setTimeout(function() { fundBox.classList.add('visible'); }, 20);
-    document.getElementById('next-wrap').style.display = 'flex';
+
+    var total = estado.questoesSelecionadas.length;
+    var btnProx = document.getElementById('btn-proxima');
+    btnProx.style.display = '';
+    btnProx.textContent = (idx + 1 < total) ? 'Próxima ›' : 'Ver Resultado';
+
+    document.getElementById('progress-fill').style.width = Math.round(((idx + 1) / total) * 100) + '%';
   }
 
-  function proximaQuestao() {
-    estado.indiceAtual++;
-    renderizarQuestao(estado.indiceAtual);
-    document.getElementById('forja-arena').scrollIntoView({ behavior: 'smooth' });
+  function questaoAnterior() {
+    if (estado.indiceAtual > 0) {
+      estado.indiceAtual--;
+      renderizarQuestao(estado.indiceAtual);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function proximaOuFinalizar() {
+    var idx = estado.indiceAtual;
+    var total = estado.questoesSelecionadas.length;
+    if (idx + 1 < total) {
+      estado.indiceAtual++;
+      renderizarQuestao(estado.indiceAtual);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      finalizarSimulado();
+    }
   }
 
   function finalizarSimulado() {
     var total = estado.questoesSelecionadas.length;
-    var acertos = estado.resultados.filter(function(r) { return r.acertou; }).length;
+    var acertos = estado.respostas.filter(function(r) { return r.acertou; }).length;
     var pct = Math.round((acertos / total) * 100);
-    var msg = pct >= 70 ? 'O Pupilo demonstra domínio. Continue forjando.' :
+    var msg = pct >= 80 ? 'Excelência demonstrada. O Grão-Mestre se orgulha.' :
+              pct >= 60 ? 'O Pupilo demonstra domínio. Continue forjando.' :
               pct >= 40 ? 'Bom início. A forja ainda tem trabalho a fazer.' :
                           'O aço precisa de mais calor. Revise e retorne.';
+
     document.getElementById('forja-arena').classList.remove('visible');
     document.getElementById('forja-resultado').classList.add('visible');
     document.getElementById('placar-display').textContent = acertos + ' / ' + total;
     document.getElementById('pct-display').textContent = pct + '% de aproveitamento';
     document.getElementById('msg-display').textContent = msg;
-    document.getElementById('forja-resumo').innerHTML = estado.resultados.map(function(r, i) {
+
+    /* resumo por questão */
+    document.getElementById('forja-resumo').innerHTML = estado.respostas.map(function(r, i) {
+      var q = estado.questoesSelecionadas[i];
+      var naoresp = r.letra === null;
+      var cls = naoresp ? 'err' : (r.acertou ? 'ok' : 'err');
+      var icon = naoresp ? '—' : (r.acertou ? '✓' : '✗');
       return '<div class="forja-resumo__item">' +
         '<span class="forja-resumo__num">' + (i+1) + '</span>' +
-        '<span class="forja-resumo__icone ' + (r.acertou ? 'ok' : 'err') + '">' + (r.acertou ? '✓' : '✗') + '</span>' +
-        '<span class="forja-resumo__materia">' + r.materia + '</span>' +
+        '<span class="forja-resumo__icone ' + cls + '">' + icon + '</span>' +
+        '<span class="forja-resumo__materia">' + q.materia + '</span>' +
       '</div>';
     }).join('');
+
+    /* gabaritos */
     document.getElementById('forja-gabaritos').innerHTML = estado.questoesSelecionadas.map(function(q, i) {
+      var r = estado.respostas[i];
       return '<div class="forja-gab-item">' +
         '<div class="forja-gab-item__header"><span class="forja-gab-item__num">' + (i+1) + '</span><span class="forja-card__badge">' + q.materia + '</span></div>' +
         '<p class="forja-gab-item__enunciado">' + q.enunciado + '</p>' +
-        '<p class="forja-gab-item__resp" style="color:var(--gold)">Resposta correta: ' + q.correta + '</p>' +
+        '<p class="forja-gab-item__resp" style="color:var(--gold)">Gabarito: ' + q.correta +
+          (r.letra ? ' &nbsp;|&nbsp; Sua resposta: ' + r.letra : ' &nbsp;|&nbsp; Não respondida') + '</p>' +
         '<p class="forja-gab-item__fund">' + q.fundamentacao + '</p>' +
       '</div>';
     }).join('');
-    document.getElementById('forja-resultado').scrollIntoView({ behavior: 'smooth' });
+
+    /* gráfico de barras */
+    desenharGrafico();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function desenharGrafico() {
+    var canvas = document.getElementById('forja-grafico');
+    if (!canvas) return;
+    /* agrupa por matéria */
+    var mapa = {};
+    estado.questoesSelecionadas.forEach(function(q, i) {
+      var r = estado.respostas[i];
+      if (!mapa[q.materia]) mapa[q.materia] = { acertos: 0, total: 0 };
+      mapa[q.materia].total++;
+      if (r.acertou) mapa[q.materia].acertos++;
+    });
+    var materias = Object.keys(mapa);
+    if (materias.length === 0) return;
+
+    var barH = 28, gap = 10, padL = 160, padR = 20, padT = 16, padB = 16;
+    var totalH = padT + materias.length * (barH + gap) - gap + padB;
+    canvas.height = totalH;
+    var W = canvas.offsetWidth || 700;
+    canvas.width = W;
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, W, totalH);
+
+    var gold = '#C8A84B';
+    var goldPale = 'rgba(200,168,75,0.18)';
+    var textMuted = '#6B84A8';
+    var textPrim = '#FDFAF0';
+    var chartW = W - padL - padR;
+
+    materias.forEach(function(mat, i) {
+      var d = mapa[mat];
+      var pct = d.total > 0 ? d.acertos / d.total : 0;
+      var y = padT + i * (barH + gap);
+
+      /* label */
+      ctx.font = '500 11px "Work Sans", sans-serif';
+      ctx.fillStyle = textMuted;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      var label = mat.length > 22 ? mat.substring(0, 21) + '…' : mat;
+      ctx.fillText(label, padL - 10, y + barH / 2);
+
+      /* trilho */
+      ctx.fillStyle = goldPale;
+      ctx.fillRect(padL, y, chartW, barH);
+
+      /* barra */
+      ctx.fillStyle = gold;
+      ctx.fillRect(padL, y, Math.round(chartW * pct), barH);
+
+      /* valor */
+      ctx.font = '500 11px "Work Sans", sans-serif';
+      ctx.fillStyle = textPrim;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(d.acertos + '/' + d.total, padL + Math.round(chartW * pct) + 6, y + barH / 2);
+    });
   }
 
   function novoSimulado() {
+    document.getElementById('forja-arena').classList.remove('visible');
     document.getElementById('forja-resultado').classList.remove('visible');
     document.getElementById('forja-gabaritos').classList.remove('visible');
     document.getElementById('forja-filtros').style.display = '';
-    document.getElementById('forja-filtros').scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function toggleGabaritos(btn) {
